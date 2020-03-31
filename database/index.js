@@ -1,19 +1,18 @@
 const mysql = require('mysql');
 
-const connection = mysql.createConnection(
-  {
-    host: "172.40.1.1",
-    user: "root",
-    password: "password",
-    database: "PopularDishesList",
-    port: 3306
-  }    
-);
+const connection = mysql.createConnection({
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASS,
+    database: process.env.MYSQL_DB,
+});
 
-
-connection.connect(() => {
-  console.log('Connected to the root at PopularDishesList Database')
-})
-
+connection.connect((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(`Connected to ${process.env.MYSQL_DB}`)
+  }
+});
 
 module.exports = connection;
