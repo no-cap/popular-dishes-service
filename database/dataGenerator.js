@@ -7,23 +7,23 @@ const faker = require('faker');
 const numberOfCompanies = 10;
 
 // maxDishes in a company
-var maxDishes = 9;
+const maxDishes = 9;
 
 // Max number of reviews per dish
-var maxReviews = 100;
+const maxReviews = 100;
 
 // max number of photos per dish
-var maxPhotos = 20;
+const maxPhotos = 20;
 
 // region and bucket for aws
-var photoBucket = 'photosthree';
-var westRegion = 'us-west-1';
+const photoBucket = 'photosthree';
+const westRegion = 'us-west-1';
 
 // function for making one company
 const makeCompany = () => {
   return new Promise((resolve, reject) => {
     var params = [faker.company.companyName()]
-    var query = 'INSERT INTO Restaurants (restaurant_name) values(?)'
+    var query = 'INSERT INTO restaurants (restaurant_name) values(?)'
     db.query(query, params, (err, data) => {
       if (err) {
         reject(err);
@@ -31,7 +31,7 @@ const makeCompany = () => {
         resolve(data);
       }
     });
-  })
+  });
 };
 
 // function for making one dish
@@ -43,8 +43,8 @@ const makeDish = (addDish, params) => {
       } else {
         res(data)
       }
-    })
-  })
+    });
+  });
 };
 
 // function for making one photo
@@ -56,38 +56,38 @@ const makePhoto = (addPhoto, photoParams) => {
       } else {
         res();
       }
-    })
-  })
+    });
+  });
 };
 
 // function for making one review;
 const makeReview = (reviewParams) => {
   return new Promise((res, rej) => {
-    query = 'INSERT INTO reviews (userid, date, rating, text, dish_id) values (?,?,?,?,?)';
+    const query = 'INSERT INTO reviews (userid, date, rating, text, dish_id) values (?,?,?,?,?)';
     db.query(query, reviewParams, (err) => {
       if (err) {
         rej(err)
       } else {
         res();
       }
-    })
-  })
+    });
+  });
 };
 
 //make users
 const makeUser = (imageUrl) => {
   return new Promise((res, rej) => {
-    var userParams = [faker.name.findName(), imageUrl, Math.floor(Math.random() * 100), Math.floor(Math.random() * 20)];
-    var query = 'INSERT INTO users (username, userphoto, reviews, friends) values (?, ?, ?, ?)';
+    const userParams = [faker.name.findName(), imageUrl, Math.floor(Math.random() * 100), Math.floor(Math.random() * 20)];
+    const query = 'INSERT INTO users (username, userphoto, reviews, friends) values (?, ?, ?, ?)';
     db.query(query, userParams, (err, data) => {
       if (err) {
         rej(err)
       } else {
         res(data);
       }
-    })
-  })
-}
+    });
+  });
+};
 
 const formatUrlWithKey = (object, region) => {
   return 'https://photosthree.s3-' + region + '.amazonaws.com/' + object.Key;
@@ -132,7 +132,7 @@ const formatUrlWithKey = (object, region) => {
             var reviewCount = Math.round(Math.random() * maxReviews);
             console.log('----------------------------------------', reviewCount);
             var params = [faker.lorem.word(), faker.random.number(), faker.lorem.words(), reviewCount, restaurantId]
-            var addDish = 'INSERT INTO PopularDishes (dish_name, price, description, review_count, restaurant) values (?,?,?,?,?)';
+            var addDish = 'INSERT INTO popular_dishes (dish_name, price, description, review_count, restaurant) values (?,?,?,?,?)';
             // then we make multiple dishes with the restaurantid as it's foreign key
             makeDish(addDish, params)
               .then(data => {
