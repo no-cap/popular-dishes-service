@@ -6,19 +6,6 @@ import FullMenu from './fullMenu.jsx';
 import { CloseButton, ModalStyle, CloseFormat } from '../components-style/Modal-Style.jsx';
 import { AppBody, Title, AllItems } from '../components-style/App-style.jsx';
 
-// import { ThemeProvider } from 'styled-components';
-
-
-
-// const theme = {
-//     'font-family': ['Arial', 'Helvetica', 'sans-serif'],
-//     "white-space": 'normal'
-// };
-
-// const Theme = ({ children }) => (
-//     <ThemeProvider theme={theme}>{children}</ThemeProvider>
-// );
-
 class App extends React.Component {
   constructor(props) {
     super(props);
