@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReviewsBox Unit Tests ReviewBox should render correctly ReviewsBox should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;

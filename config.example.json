@@ -1,0 +1,6 @@
+{
+    "aws": {
+        "accessKey": "YOUR ACCESS KEY HERE",
+        "secretKey": "YOUR SECRET KEY HERE"
+    }
+}

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PhotoEntry Unit Tests PhotoEntry should render correctly PhotoEntry should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;
