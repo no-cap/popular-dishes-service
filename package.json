@@ -11,7 +11,7 @@
   "scripts": {
     "test": "jest",
     "start": "nodemon ./server/index.js",
-    "build:react": "webpack -d --watch",
+    "react-dev": "webpack -w --mode production",
     "seed": "node ./database/dataGenerator.js"
   },
   "repository": {
