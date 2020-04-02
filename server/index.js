@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const controller = require('./controller.js');
+const model = require('./model.js');
 
 const app = express();
 const companyNumber = 10; // this is how many companies there are;
@@ -21,23 +21,54 @@ app.use('/', express.static(path.join(__dirname, '../client/dist/')));
 
 
 app.get('/popularDishes/getCompany', (req, res) => {
-  controller.getCompany(companyNumber, res);
+  model.getCompany(companyNumber, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send();
+    } else {
+      res.status(200).send(data);
+    }
+  });
 });
 
 app.get('/popularDishes/getItems', (req, res) => {
-  controller.getDishes(req, res);
+  const { restaurantId } = req.query;
+  model.getDishes(restaurantId, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send();
+    } else {
+      res.status(200).send(data);
+    }
+  });
 });
 
 app.get('/popularDishes/getPhotos', (req, res) => {
-  controller.getPhotos(req, res);
+  const { dishId } = req.query;
+  model.getPhotos(dishId, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send();
+    } else {
+      res.status(200).send(data);
+    }
+  });
 });
 
 app.get('/popularDishes/getReviews', (req, res) => {
-  controller.getReviews(req, res);
+  const { numberOfReviews } = req.query;
+  model.getReviews(numberOfReviews, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send();
+    } else {
+      res.status(200).send(data);
+    }
+  });
 });
 
 app.get('/popularDishes/arrow.png', (req, res) => {
-  res.sendFile();
+  res.sendFile('/arrow.png');
 });
 
 app.get('/popularDishes/leftarrow.png', (req, res) => {
