@@ -11,7 +11,7 @@
   "scripts": {
     "test": "jest",
     "start": "nodemon ./server/index.js",
-    "build:react": "webpack -d --watch",
+    "react-dev": "webpack -w --mode production",
     "seed": "node ./database/dataGenerator.js"
   },
   "repository": {
@@ -35,6 +35,7 @@
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "dateformat": "^3.0.3",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "jquery": "^3.4.1",
@@ -56,7 +57,11 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.4",
     "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.0",
     "jest": "^24.0.0"
   }
 }
