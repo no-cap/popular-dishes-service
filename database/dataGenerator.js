@@ -1,4 +1,3 @@
-const aws = require('aws-sdk');
 const faker = require('faker');
 const config = require('../config.json');
 const db = require('./index.js');
@@ -79,30 +78,10 @@ const makeUser = (imageUrl) => new Promise((res, rej) => {
   });
 });
 
-const formatUrlWithKey = (object) => `https://${bucket}.s3-${region}.amazonaws.com/${object.key}`;
+const formatUrlWithKey = (object) => `https://${bucket}.s3-${region}.amazonaws.com/${index}.jpg`;
 
 (async function () {
   try {
-    aws.config.setPromisesDependency();
-    aws.config.update({
-      accessKeyId: config.aws.accessKey,
-      secretAccessKey: config.aws.secretKey,
-      region,
-    });
-
-    const s3 = new aws.S3();
-
-    const response1 = await s3.listObjectsV2({
-      Bucket: bucket,
-    }).promise();
-
-    const response2 = await s3.listObjectsV2({
-      Bucket: bucket,
-    }).promise();
-
-    const imagesArray = response1.Contents;
-    const avatarsArray = response2.Contents;
-
     for (let i = 0; i < numberOfCompanies; i += 1) {
       makeCompany()
         .then((data) => {
