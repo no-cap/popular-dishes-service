@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 const restaurantsSchema = new Schema({
-  restaurantName: String,
+  restaurantName: { type: String, required: true },
   popularDishes: [{
     type: Schema.Types.ObjectId,
     ref: 'popularDishes',
@@ -11,7 +11,7 @@ const restaurantsSchema = new Schema({
 });
 
 const popularDishesSchema = new Schema({
-  dishName: String,
+  dishName: { type: String, required: true },
   price: Number,
   description: String,
   reviews: [
@@ -43,13 +43,15 @@ const reviewsSchema = new Schema({
   dishId: {
     type: Schema.Types.ObjectId,
     ref: 'popularDishes',
+    required: true,
   },
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'users',
+    required: true,
   },
-  dateTime: Date,
-  rating: Number,
+  dateTime: { type: Date, required: true },
+  rating: { type: Number, required: true },
   reviewText: String,
 });
 
@@ -59,14 +61,11 @@ const photosSchema = new Schema({
   reviewId: {
     type: Schema.Types.ObjectId,
     ref: 'reviews',
+    required: true,
   },
 });
 
 const usersSchema = new Schema({
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: 'users',
-  },
   username: String,
   userPhoto: String,
 });
