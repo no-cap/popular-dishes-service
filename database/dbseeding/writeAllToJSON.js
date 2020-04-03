@@ -1,9 +1,10 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable no-console */
 /* eslint-disable quotes */
 /* eslint-disable quote-props */
 const fs = require('fs');
 
-const someData = {
+const record = {
   "restaurant_id": "<varchar>",
   "restaurant_name": "<str>",
   "location": "<geoson>",
@@ -35,7 +36,7 @@ const someData = {
   ]
 };
 
-const someRecords = [someData, someData, someData, someData];
+const someRecords = [record, record, record, record];
 const allRecords = [someRecords, someRecords];
 
 // Function that returns a write stream to a file called restaurantsCOUNT.json
@@ -86,5 +87,5 @@ const writeAllData = (array, prefix) => {
     writeData(writer, set);
   });
 };
-writeAllData(allRecords, 'monsters');
-module.exports.writeAllToJSON = writeAllData;
+
+module.exports = writeAllData;
