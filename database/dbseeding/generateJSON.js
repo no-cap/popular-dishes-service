@@ -1,13 +1,9 @@
-const faker = require(faker);
-const db = require('../mongoConnect.js');
+const faker = require('faker');
 const writeAllToJSON = require('./writeAllToJSON.js');
-const { Restaurant, PopularDish, Review, User, Photo } = require('./mongoModels.js');
 
 // UTILITIES
 // min >= returnValue < max
-const randomNum = (min, max) => {
-  return Math.random() * (max - min) + min;
-}
+const randomNum = (min, max) => Math.floor((Math.random() * (max - min) + min));
 
 // write Restaurant, PopularDish, Review, User, and Photo records,
 // group into sets of 100,000
@@ -20,11 +16,11 @@ const AllPhotos = []; // need 1 per review (40-80M)
 /* USERS */
 // user profile images > https://sdc-users.s3-us-west-1.amazonaws.com/1.png
 const createUsers = () => {
-  for (let i = 0; i < 20; i += 1) {
-    let set = [];
-    for (let ii = 0; ii < 100; ii += 1) {
+  for (let i = 0; i < 50; i += 1) {
+    const set = [];
+    for (let ii = 0; ii < 100000; ii += 1) {
       set.push({
-        username: fakeName,
+        username: faker.name.firstName(),
         userPhoto: `https://sdc-users.s3-us-west-1.amazonaws.com/${randomNum(0, 71)}.png`,
       });
     }
@@ -32,21 +28,46 @@ const createUsers = () => {
   }
 };
 
+const createPhotos = () => {
+  for (let i = 0; i < 50; i += 1) {
+    const set = [];
+    for (let ii = 0; ii < 100000; ii += 1) {
+      set.push({
+        caption: faker.lorem.words(),
+        userPhoto: `https://sdc-food.s3-us-west-1.amazonaws.com/${randomNum(0, 738)}.jpg`,
+      });
+    }
+    AllPhotos.push(set);
+  }
+};
+
+const createRestaurants = () => {
+  for (let i = 0; i < 20; i += 1) {
+    const set = [];
+    for (let ii = 0; ii < 100; ii += 1) {
+      set.push({
+        restaurantName: faker.company.companyName(),
+        // popularDishes: [],
+      });
+    }
+    AllRestaurants.push(set);
+  }
+};
+
+createUsers();
+writeAllToJSON(AllUsers, 'users');
+
+// createPhotos();
+// writeAllToJSON(AllPhotos, 'photos');
+
+// createRestaurants();
+// writeAllToJSON(AllRestaurants, 'restaurants');
+
+
 // writeAllToJSON => expects an array of arrays of documents
 // This creates an async forEach method which we will use to write records to a json file
-async function asyncForEach(array, callback) {
-  for (let i = 0; i < array.length; i += 1) {
-    // eslint-disable-next-line no-await-in-loop
-    await callback(array[i], i, array);
-  }
-}
-asyncForEach(AllRecords, writeAllToJSON);
-// import json files to database
 
-db.close(false, (err) => {
-  if (err) {
-    console.log(`Failed to disconnect from mongodb://${db.host}:${db.port}/${db.name}`);
-  } else {
-    console.log(`Successfully disconnected from mongodb://${db.host}:${db.port}/${db.name}`);
-  }
-});
+
+// writeAllToJSON(AllPopularDishes, 'popularDishes');
+// writeAllToJSON(AllReviews, 'reviews');
+// import json files to database
