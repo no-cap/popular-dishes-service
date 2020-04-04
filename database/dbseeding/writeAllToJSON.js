@@ -63,7 +63,7 @@ const writeData = (stream, array) => {
   stream.write('[\n', () => {
     const writeAsync = async (inputStream) => {
       await asyncForEach(array, async (record, i) => {
-        await inputStream.write(`${JSON.stringify(record)}${i === array.length -1 ? '' : ','}\n`);
+        await inputStream.write(`${JSON.stringify(record)}${i === array.length - 1 ? '' : ','}\n`);
       });
       stream.write(']', () => {
         console.log(`Closing stream to ${stream.path}...`);
