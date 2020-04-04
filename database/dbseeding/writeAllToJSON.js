@@ -42,7 +42,7 @@ const allRecords = [someRecords, someRecords, someRecords, someRecords];
 
 // Function that returns a write stream to a file called restaurantsCOUNT.json
 const openStream = (count, prefix) => (
-  fs.createWriteStream(`../${prefix}${count}.json`, {
+  fs.createWriteStream(`../JSON_Data/${prefix}/${prefix}${count}.json`, {
     flags: 'a',
   })
 );
@@ -62,8 +62,8 @@ const asyncForEach = async (array, callback) => {
 const writeData = (stream, array) => {
   stream.write('[\n', () => {
     const writeAsync = async (inputStream) => {
-      await asyncForEach(array, async (record) => {
-        await inputStream.write(`${JSON.stringify(record)},\n`);
+      await asyncForEach(array, async (record, i) => {
+        await inputStream.write(`${JSON.stringify(record)}${i === array.length -1 ? '' : ','}\n`);
       });
       stream.write(']', () => {
         console.log(`Closing stream to ${stream.path}...`);
@@ -87,7 +87,6 @@ const writeAllData = async (array, prefix) => {
     fileCount += 1;
     writeData(writer, set);
   });
-  console.log(`Finished writing all data for ${prefix}`);
 };
 
 // writeAllData(allRecords, 'restaurants');
