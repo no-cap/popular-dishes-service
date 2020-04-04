@@ -37,7 +37,6 @@
     "dateformat": "^3.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "faker": "^4.1.0",
     "jquery": "^3.4.1",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
@@ -64,6 +63,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.0",
+    "faker": "^4.1.0",
     "jest": "^24.0.0"
   }
 }
