@@ -35,9 +35,10 @@ const record = {
     }
   ]
 };
-
-const someRecords = [record, record, record, record];
-const allRecords = [someRecords, someRecords];
+// 100,000
+const someRecords = [Array(100).fill(record)];
+// eslint-disable-next-line no-unused-vars
+const allRecords = [someRecords, someRecords, someRecords, someRecords];
 
 // Function that returns a write stream to a file called restaurantsCOUNT.json
 const openStream = (count, prefix) => (
@@ -47,12 +48,12 @@ const openStream = (count, prefix) => (
 );
 
 // This creates an async forEach method which we will use to write records to a json file
-async function asyncForEach(array, callback) {
+const asyncForEach = async (array, callback) => {
   for (let i = 0; i < array.length; i += 1) {
     // eslint-disable-next-line no-await-in-loop
     await callback(array[i], i, array);
   }
-}
+};
 
 /*
   * This fuction writes an array of object records to a json file,
@@ -78,14 +79,16 @@ const writeData = (stream, array) => {
   * writeData function on each, writing each set to a json file
   * NOTE: will not remove trailing comma from final record, will break some browsers!!
 */
-const writeAllData = (array, prefix) => {
+const writeAllData = async (array, prefix) => {
   let fileCount = 0;
-  array.forEach((set) => {
-    // eslint-disable-next-line prefer-const
-    let writer = openStream(fileCount, prefix);
+  await asyncForEach(array, (set) => {
+    console.log(`Opening stream to ${prefix}${fileCount}.json...`);
+    const writer = openStream(fileCount, prefix);
     fileCount += 1;
     writeData(writer, set);
   });
+  console.log(`Finished writing all data for ${prefix}`);
 };
 
+// writeAllData(allRecords, 'restaurants');
 module.exports = writeAllData;
