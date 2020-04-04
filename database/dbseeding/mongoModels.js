@@ -14,29 +14,17 @@ const popularDishesSchema = new Schema({
   dishName: { type: String, required: true },
   price: Number,
   description: String,
-  reviews: [
-    {
-      reviewId: {
-        type: Schema.Types.ObjectId,
-        ref: 'reviews',
-      },
-      dateTime: Date,
-      rating: Number,
-      reviewText: String,
-      userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'users',
-      },
-      username: String,
-      userPhoto: String,
-      photoId: {
-        type: Schema.Types.ObjectId,
-        ref: 'photos',
-      },
-      photoUrl: String,
-      photoCaption: String,
+  restaurantId: {
+    type: Schema.Types.ObjectId,
+    ref: 'restaurants',
+    required: true,
+  },
+  reviews: [{
+    reviewId: {
+      type: Schema.Types.ObjectId,
+      ref: 'reviews',
     },
-  ],
+  }],
 });
 
 const reviewsSchema = new Schema({
@@ -50,6 +38,11 @@ const reviewsSchema = new Schema({
     ref: 'users',
     required: true,
   },
+  photoId: {
+    type: Schema.Types.ObjectId,
+    ref: 'photos',
+    required: true,
+  },
   dateTime: { type: Date, required: true },
   rating: { type: Number, required: true },
   reviewText: String,
@@ -58,11 +51,6 @@ const reviewsSchema = new Schema({
 const photosSchema = new Schema({
   url: { type: String, required: true },
   caption: String,
-  reviewId: {
-    type: Schema.Types.ObjectId,
-    ref: 'reviews',
-    required: true,
-  },
 });
 
 const usersSchema = new Schema({
