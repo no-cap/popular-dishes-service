@@ -4,42 +4,6 @@
 /* eslint-disable quote-props */
 const fs = require('fs');
 
-const record = {
-  "restaurant_id": "<varchar>",
-  "restaurant_name": "<str>",
-  "location": "<geoson>",
-  "popularDishes": [
-    {
-      "dish_id": "<varchar>",
-      "dish_name": "<str>",
-      "price": "<num>",
-      "description": "<text>",
-      "reviews": [
-        {
-          "review_id": "<varchar>",
-          "date_time": "<date>",
-          "rating": "<int>",
-          "review_text": "<text>",
-          "user": {
-            "user_id": "<varchar>",
-            "username": "<varchar>",
-            "userphoto": "<varchar>"
-          },
-          "photo": {
-            "photo_id": "<varchar>",
-            "url": "<varchar>",
-            "caption": "<varchar>"
-          }
-        }
-      ]
-    }
-  ]
-};
-// 100,000
-const someRecords = [Array(100).fill(record)];
-// eslint-disable-next-line no-unused-vars
-const allRecords = [someRecords, someRecords, someRecords, someRecords];
-
 // Function that returns a write stream to a file called restaurantsCOUNT.json
 const openStream = (count, prefix) => (
   fs.createWriteStream(`../JSON_Data/${prefix}/${prefix}${count}.json`, {
