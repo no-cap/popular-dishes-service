@@ -23,13 +23,19 @@ const asyncForEach = async (array, callback) => {
   * This fuction writes an array of object records to a json file,
   * logging in the console when each file closes
 */
-const writeData = (stream, array) => {
-  stream.write('[\n', () => {
+const writeData = (stream, array, insertHow) => {
+  let open = insertHow === 'open';
+  let close = insertHow === 'close';
+  if (open === close) {
+    open = false;
+    close = false;
+  }
+  stream.write(open ? '[\n' : '', () => {
     const writeAsync = async (inputStream) => {
       await asyncForEach(array, async (record, i) => {
-        await inputStream.write(`${JSON.stringify(record)}${i === array.length - 1 ? '' : ','}\n`);
+        await inputStream.write(`${JSON.stringify(record)}${(i === array.length - 1 && close) ? '' : ','}\n`);
       });
-      stream.write(']', () => {
+      stream.write(close ? ']' : '', () => {
         console.log(`Closing stream to ${stream.path}...`);
         stream.close();
       });
@@ -43,13 +49,13 @@ const writeData = (stream, array) => {
   * writeData function on each, writing each set to a json file
   * NOTE: will not remove trailing comma from final record, will break some browsers!!
 */
-const writeAllData = async (array, prefix) => {
+const writeAllData = async (array, prefix, insertHow) => {
   let fileCount = 0;
   await asyncForEach(array, (set) => {
     console.log(`Opening stream to ${prefix}${fileCount}.json...`);
     const writer = openStream(fileCount, prefix);
     fileCount += 1;
-    writeData(writer, set);
+    writeData(writer, set, insertHow);
   });
 };
 
