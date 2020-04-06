@@ -13,7 +13,6 @@
     "start": "nodemon ./server/index.js",
     "react-dev": "webpack -w --mode production",
     "gen:users": "node ./database/dbseeding/generateUsers.js",
-    "gen:photos": "node ./database/dbseeding/generatePhotos.js",
     "gen:restaurants": "node ./database/dbseeding/generateRestaurants.js",
     "gen:reviews": "node ./database/dbseeding/generateReviews.js",
     "gen:dishes": "node ./database/dbseeding/generateDishes.js",
