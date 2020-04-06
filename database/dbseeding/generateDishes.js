@@ -43,7 +43,7 @@ const getDishes = (noFiles, noRecords) => {
     })
     .then(() => {
       console.log('Writing JSON...');
-      writeAllToJSON(AllDishes, 'dishes');
+      writeAllToJSON(AllDishes, 'dishes', process.argv[4]);
     })
     .catch((err) => {
       console.error(err);
