@@ -23,20 +23,15 @@ db.once('open', () => {
           }
           totalInserted += res.insertedCount;
           console.log(`Successfully inserted ${res.insertedCount} records from file (${i}) to the ${collection} collection`);
-          fs.unlink(path.join(DIR, `${collection}${i}.json`), (err) => {
-            if (err) {
-              console.error(err);
-            }
-            if (documentCount === 16) {
-              db.close(false, (err) => {
-                if (err) {
-                  console.error(err);
-                } else {
-                  console.log(`Successfully disconnected from the database after inserting ${totalInserted} records to ${collection}`);
-                }
-              });
-            }
-          });
+          if (documentCount === process.argv[3]) {
+            db.close(false, (err) => {
+              if (err) {
+                console.error(err);
+              } else {
+                console.log(`Successfully disconnected from the database after inserting ${totalInserted} records to ${collection}`);
+              }
+            });
+          }
         });
       }
     });
