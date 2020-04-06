@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const db = require('../mongoConnect.js');
 
-const { Schema, model } = mongoose;
+const { Schema } = mongoose;
 
 const restaurantsSchema = new Schema({
   restaurantName: { type: String, required: true },
@@ -10,7 +11,7 @@ const restaurantsSchema = new Schema({
   }],
 });
 
-const popularDishesSchema = new Schema({
+const dishesSchema = new Schema({
   dishName: { type: String, required: true },
   price: Number,
   description: String,
@@ -38,28 +39,26 @@ const reviewsSchema = new Schema({
     ref: 'users',
     required: true,
   },
-  photoId: {
-    type: Schema.Types.ObjectId,
-    ref: 'photos',
-    required: true,
-  },
+  photoUrl: { type: String, required: true },
+  caption: String,
   dateTime: { type: Date, required: true },
   rating: { type: Number, required: true },
   reviewText: String,
 });
 
-const photosSchema = new Schema({
-  url: { type: String, required: true },
-  caption: String,
-});
+// const photosSchema = new Schema({
+//   url: { type: String, required: true },
+//   caption: String,
+// });
 
 const usersSchema = new Schema({
   username: String,
   userPhoto: String,
 });
 
-module.exports.Restaurant = model('restaurants', restaurantsSchema);
-module.exports.PopularDish = model('popularDishes', popularDishesSchema);
-module.exports.Review = model('reviews', reviewsSchema);
-module.exports.User = model('users', usersSchema);
-module.exports.Photo = model('photos', photosSchema);
+
+module.exports.Restaurant = db.model('restaurants', restaurantsSchema);
+module.exports.Dish = db.model('dishes', dishesSchema);
+module.exports.Review = db.model('reviews', reviewsSchema);
+module.exports.User = db.model('users', usersSchema);
+// module.exports.Photo = model('photos', photosSchema);
