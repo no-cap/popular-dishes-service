@@ -37,7 +37,8 @@ module.exports.postReview = (req, res) => {
 
 // /api/restaurants/:restaurantID/dishes
 module.exports.getDishes = (req, res) => {
-  Model.getDishes((err, results) => {
+  const { restaurantId } = req.body;
+  Model.getDishes(restaurantId, (err, results) => {
     if (err) {
       console.log(err);
       res.status(400).send();
@@ -49,7 +50,8 @@ module.exports.getDishes = (req, res) => {
 
 // /api/restaurants/:restaurantID/nearby
 module.exports.getNearby = (req, res) => {
-  Model.getNearby((err, results) => {
+  const { restaurantId } = req.body;
+  Model.getNearby(restaurantId, (err, results) => {
     if (err) {
       console.log(err);
       res.status(400).send();
