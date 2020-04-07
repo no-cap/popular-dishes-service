@@ -2,10 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const model = require('./model.js');
+const Controller = require('./controllers/mongo.controller.js');
 
 const app = express();
-const companyNumber = 10; // this is how many companies there are;
 
 app.listen(process.env.SERVER_PORT, (err) => {
   if (err) {
@@ -16,55 +15,30 @@ app.listen(process.env.SERVER_PORT, (err) => {
 });
 
 app.use(bodyParser.json());
-
 app.use('/', express.static(path.join(__dirname, '../client/dist/')));
 
+/*
+  * POST ROUTES
+*/
 
-app.get('/popularDishes/getCompany', (req, res) => {
-  model.getCompany(companyNumber, (err, data) => {
-    if (err) {
-      console.log(err);
-      res.status(400).send();
-    } else {
-      res.status(200).send(data);
-    }
-  });
+app.post('/api/dishes', (req, res) => {
+  Controller.postDish(req, res);
 });
 
-app.get('/popularDishes/getItems', (req, res) => {
-  const { restaurantId } = req.query;
-  model.getDishes(restaurantId, (err, data) => {
-    if (err) {
-      console.log(err);
-      res.status(400).send();
-    } else {
-      res.status(200).send(data);
-    }
-  });
+app.post('/api/reviews', (req, res) => {
+  Controller.postReview(req, res);
 });
 
-app.get('/popularDishes/getPhotos', (req, res) => {
-  const { dishId } = req.query;
-  model.getPhotos(dishId, (err, data) => {
-    if (err) {
-      console.log(err);
-      res.status(400).send();
-    } else {
-      res.status(200).send(data);
-    }
-  });
+/*
+  * GET ROUTES
+*/
+
+app.get('/api/restaurants/:restaurantId', (req, res) => {
+  Controller.getDishes(req.params.restaurantId, res);
 });
 
-app.get('/popularDishes/getReviews', (req, res) => {
-  const { numberOfReviews } = req.query;
-  model.getReviews(numberOfReviews, (err, data) => {
-    if (err) {
-      console.log(err);
-      res.status(400).send();
-    } else {
-      res.status(200).send(data);
-    }
-  });
+app.get('/api/restaurants/:restaurantId/nearby', (req, res) => {
+  Controller.getNearby(req.params.restaurantId, res);
 });
 
 app.get('/popularDishes/arrow.png', (req, res) => {
@@ -73,4 +47,28 @@ app.get('/popularDishes/arrow.png', (req, res) => {
 
 app.get('/popularDishes/leftarrow.png', (req, res) => {
   res.sendFile('/leftarrow.png');
+});
+
+/*
+  * PUT ROUTES
+*/
+
+app.put('/api/dishes/', (req, res) => {
+  Controller.putDish(req, res);
+});
+
+app.put('/api/reviews/', (req, res) => {
+  Controller.putReview(req, res);
+});
+
+/*
+  * DELETE ROUTES
+*/
+
+app.delete('/api/dishes', (req, res) => {
+  Controller.deleteDish(req, res);
+});
+
+app.delete('/api/reviews', (req, res) => {
+  Controller.deleteReview(req, res);
 });
