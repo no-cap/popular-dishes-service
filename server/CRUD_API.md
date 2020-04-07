@@ -88,7 +88,7 @@ ______________________________________________________
 ______________________________________________________
 ### PUT
 
-`/api/restaurants/:restaurantID`
+`/api/restaurants/:restaurantID/dishes`
 
 **Purpose**: Updating a restaurant's dish
 
@@ -101,7 +101,7 @@ ______________________________________________________
 }
 ```
 
-`/api/restaurants/:restaurantID/dishes/:dishID`
+`/api/restaurants/:restaurantID/dishes/:dishID/reviews/:reviewID`
 
 **Purpose**: Updating a dish's review
 
