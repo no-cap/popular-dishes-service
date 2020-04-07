@@ -12,7 +12,7 @@
     "test": "jest",
     "start": "nodemon ./server/index.js",
     "react-dev": "webpack -w --mode production",
-    "gen:dishes": "node --max-old-space-size=8192 ./database/dbseeding/genDishes.js"
+    "gen:dishes": "node --max-old-space-size=13312 ./database/dbseeding/genDishes.js"
   },
   "repository": {
     "type": "git",
