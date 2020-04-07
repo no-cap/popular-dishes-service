@@ -1,6 +1,6 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable no-underscore-dangle */
 const faker = require('faker');
-const Promise = require('bluebird');
 const mongoose = require('mongoose');
 const cliProgress = require('cli-progress');
 const { Dish, Restaurant, Review, User } = require('./mongoModels.js');
