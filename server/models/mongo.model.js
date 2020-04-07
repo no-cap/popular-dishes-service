@@ -15,6 +15,7 @@ module.exports.postDish = (dish, callback) => {
     if (err) {
       callback(err);
     } else {
+      // eslint-disable-next-line max-len
       Restaurant.findByIdAndUpdate(result.restaurandId, { $push: { popularDishes: result._id } }, (err, result) => {
         if (err) {
           callback(err);
@@ -70,7 +71,7 @@ module.exports.getDishes = (restaurandId, callback) => {
 
 // /api/restaurants/:restaurantID/dishes/:dishID
 module.exports.putDish = (dish, callback) => {
-  Dish.findByIdAndUpdate(dish, { price: dish.price }, (err, result) => {
+  Dish.findByIdAndUpdate(dish._id, { price: dish.price }, (err, result) => {
     if (err) {
       callback(err);
     } else {
@@ -102,6 +103,7 @@ module.exports.deleteDish = ({ restaurandId, dishId }, callback) => {
       result.reviews.forEach((review) => {
         Review.findByIdAndDelete(review._id, (err, result) => {
           if (err) callback(err);
+          // eslint-disable-next-line max-len
           User.findByIdAndUpdate(result.userId, { $pull: { reviews: result._id } }, (err, result) => {
             if (err) {
               callback(err);
