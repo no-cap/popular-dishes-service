@@ -21,10 +21,8 @@ const dishesSchema = new Schema({
     required: true,
   },
   reviews: [{
-    reviewId: {
-      type: Schema.Types.ObjectId,
-      ref: 'reviews',
-    },
+    type: Schema.Types.ObjectId,
+    ref: 'reviews',
   }],
 });
 
@@ -41,7 +39,8 @@ const reviewsSchema = new Schema({
   },
   photoUrl: { type: String, required: true },
   caption: String,
-  dateTime: { type: Date, required: true },
+  createdAt: Number,
+  updatedAt: Number,
   rating: { type: Number, required: true },
   reviewText: String,
 });
@@ -54,6 +53,10 @@ const reviewsSchema = new Schema({
 const usersSchema = new Schema({
   username: String,
   userPhoto: String,
+  reviews: [{
+    type: Schema.Types.ObjectId,
+    ref: 'reviews',
+  }],
 });
 
 
