@@ -69,8 +69,8 @@ module.exports.getDishes = (restaurandId, callback) => {
 */
 
 // /api/restaurants/:restaurantID/dishes/:dishID
-module.exports.putDish = ({ dishId }, callback) => {
-  Dish.findByIdAndUpdate(dishId, (err, result) => {
+module.exports.putDish = (dish, callback) => {
+  Dish.findByIdAndUpdate(dish, { price: dish.price }, (err, result) => {
     if (err) {
       callback(err);
     } else {
