@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-console */
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-underscore-dangle */
 const faker = require('faker');
