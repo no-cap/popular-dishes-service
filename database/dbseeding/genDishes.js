@@ -7,7 +7,7 @@ const { Dish, Restaurant, Review, User } = require('./mongoModels.js');
 
 
 const randomNum = (min, max) => Math.floor((Math.random() * (max - min) + min));
-const NumberOfRestaurants = process.argv[2] || 5000;
+const NumberOfRestaurants = process.argv[2] || 15000;
 const DishesPerRestaurant = process.argv[3] || 4;
 const ReviewsPerDish = process.argv[4] || 2;
 
