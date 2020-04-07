@@ -42,11 +42,11 @@ app.get('/api/restaurants/:restaurantId/nearby', (req, res) => {
 });
 
 app.get('/popularDishes/arrow.png', (req, res) => {
-  res.sendFile('/arrow.png');
+  res.sendFile('/assets/arrow.png');
 });
 
 app.get('/popularDishes/leftarrow.png', (req, res) => {
-  res.sendFile('/leftarrow.png');
+  res.sendFile('/assets/leftarrow.png');
 });
 
 /*
