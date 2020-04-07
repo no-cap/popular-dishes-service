@@ -75,6 +75,8 @@ const someReviews = (dish) => {
       userId: genIDs(1)[0],
       photoUrl: `https://sdc-food.s3-us-west-1.amazonaws.com/${randomNum(0, 738)}.jpg`,
       caption: faker.lorem.words(),
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
       rating: randomNum(1, 6),
       reviewText: faker.lorem.sentences(),
     }));
