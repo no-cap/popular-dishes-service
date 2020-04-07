@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const Model = require('../models/mongo.model.js');
 
 
@@ -5,7 +6,7 @@ const Model = require('../models/mongo.model.js');
   * POST ROUTES
 */
 
-// /api/restaurants/:restaurantID/dishes
+// /api/dishes
 module.exports.postDish = (req, res) => {
   const newDish = req.body;
   Model.postDish(newDish, (err, result) => {
@@ -18,7 +19,7 @@ module.exports.postDish = (req, res) => {
   });
 };
 
-// /api/restaurants/:restaurantID/dishes/:dishID/reviews
+// /api/reviews
 module.exports.postReview = (req, res) => {
   const newReview = req.body;
   Model.postReview(newReview, (err, result) => {
@@ -35,9 +36,9 @@ module.exports.postReview = (req, res) => {
   * GET ROUTES
 */
 
-// /api/restaurants/:restaurantID/dishes
-module.exports.getDishes = (req, res) => {
-  const { restaurantId } = req.body;
+// /api/restaurants/:restaurantID
+module.exports.getDishes = (restaurantId, res) => {
+  console.log('GET /api/restaurants/');
   Model.getDishes(restaurantId, (err, results) => {
     if (err) {
       console.log(err);
@@ -65,7 +66,7 @@ module.exports.getNearby = (req, res) => {
   * PUT ROUTES
 */
 
-// /api/restaurants/:restaurantID/dishes/:dishID
+// /api/dishes/
 module.exports.putDish = (req, res) => {
   const updatedDish = req.body;
   Model.putDish(updatedDish, (err, result) => {
@@ -78,7 +79,7 @@ module.exports.putDish = (req, res) => {
   });
 };
 
-// /api/restaurants/:restaurantID/dishes/:dishID/reviews/:reviewID
+// /api/reviews
 module.exports.putReview = (req, res) => {
   const updatedReview = req.body;
   Model.putReview(updatedReview, (err, result) => {
@@ -95,7 +96,7 @@ module.exports.putReview = (req, res) => {
   * DELETE ROUTES
 */
 
-// /api/restaurants/:restaurantID/dishes/:dishID
+// /api/dishes
 module.exports.deleteDish = (req, res) => {
   const deletedDish = req.body;
   Model.deleteDish(deletedDish, (err, result) => {
@@ -108,7 +109,7 @@ module.exports.deleteDish = (req, res) => {
   });
 };
 
-// /api/restaurants/:restaurantID/dishes/:dishID/reviews/:reviewID
+// /api/reviews
 module.exports.deleteReview = (req, res) => {
   const deletedReview = req.body;
   Model.deleteReview(deletedReview, (err, result) => {
