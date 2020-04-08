@@ -2,3 +2,5 @@ node_modules
 config.json
 .env
 .vscode
+client/dist/bundle.js
+client/dist/bundle.js.map
