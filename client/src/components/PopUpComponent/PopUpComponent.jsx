@@ -31,16 +31,19 @@ class PopUpComponent extends React.Component {
   }
 
   render() {
+    const { photos, dishName, price, description, reviews } = this.props.dish;
     return (
       <ItemDescription>
-        <PhotoBox photos={this.props.photos} ref={this.photoBoxElement} />
+        <PhotoBox photos={photos} ref={this.photoBoxElement} />
         <SmallDescriptionFormatter>
-          <Name>{this.props.item.dish_name}</Name>
-          <Price>{`${this.props.item.price}.00`}</Price>
+          <Name>{dishName}</Name>
+          <Price>{`${price}`}</Price>
         </SmallDescriptionFormatter>
         <ReviewsFormatter>
-          <SmallDescriptionBorder> <p>{this.props.item.description}</p> </SmallDescriptionBorder>
-          <ReviewsBox reviews={this.props.reviews} />
+          <SmallDescriptionBorder>
+            <p>{description}</p>
+          </SmallDescriptionBorder>
+          <ReviewsBox reviews={reviews} />
         </ReviewsFormatter>
       </ItemDescription>
     );
