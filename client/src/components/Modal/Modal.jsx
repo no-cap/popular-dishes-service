@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 const modalRoot = document.getElementById('modal-root');
 
 class Modal extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.el = document.createElement('div');
   }
 
@@ -18,10 +18,7 @@ class Modal extends React.Component {
   }
 
   render() {
-    return ReactDOM.createPortal(
-      this.props.children,
-      this.el,
-    );
+    return ReactDOM.createPortal(this.props.children, this.el);
   }
 }
 
