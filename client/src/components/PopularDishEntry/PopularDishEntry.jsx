@@ -17,16 +17,13 @@ const notFound = 'https://www.yorkshirecareequipment.com/wp-content/uploads/2018
 class PopularDishEntry extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
     this.onClickHandler = this.onClickHandler.bind(this);
     this.handleBlackSpace = this.handleBlackSpace.bind(this);
   }
 
   onClickHandler(e) {
     e.preventDefault();
-    this.props.buttonHandler(e, this.props.item, this.props.photos);
+    this.props.buttonHandler(e, this.props.dish, this.props.photos);
   }
 
   // attempt at handling different sized images. A lot harder than anticipated;
@@ -47,27 +44,23 @@ class PopularDishEntry extends React.Component {
   }
 
   render() {
+    const { photos, dish } = this.props;
     return (
       <div onClick={this.onClickHandler} >
         <PopularDish className="popper">
           <Cropper>
-            {(this.props.photos.length > 0)
-              ? <PhotoImage src={this.props.photos[0].url} size={this.handleBlackSpace(this.props.photos[0].url)} className="popper" />
+            {(photos.length > 0)
+              ? <PhotoImage src={photos[0].url} size={this.handleBlackSpace(photos[0].url)} className="popper" />
               : <PhotoImage src={notFound} size={this.handleBlackSpace(notFound)} className="popper" />}
           </Cropper>
           <PopularDishText className="popper">
-            <PopularDishName className="popper">{this.props.item.dish_name}</PopularDishName>
+            <PopularDishName className="popper">{dish.dishName}</PopularDishName>
             <br />
-            <span className="popper">
-              {this.props.photos.length}
-              Photos &#183;
-              {this.props.item.review_count}
-              Reviews
-            </span>
+            <span className="popper">{photos.length} Photos &#183; {dish.reviews.length} Reviews</span>
           </PopularDishText>
           <PriceBox className="popper">
-            <Price primary className="popper">${this.props.item.price}</Price>
-            <Price className="popper">${this.props.item.price}</Price>
+            <Price primary className="popper">${dish.price}</Price>
+            <Price className="popper">${dish.price}</Price>
           </PriceBox>
         </PopularDish>
       </div>
