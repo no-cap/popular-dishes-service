@@ -48,10 +48,26 @@ module.exports.postReview = (review, callback) => {
 /*
   * GET ROUTES
 */
-
+/*
+Project.find(query)
+  .populate({ 
+     path: 'pages',
+     populate: {
+       path: 'components',
+       model: 'Component'
+     } 
+  })
+  .exec(function(err, docs) {});
+*/
 // /api/restaurants/:restaurantID/dishes
 module.exports.getDishes = (restaurandId, callback) => {
-  Restaurant.findById(restaurandId, (err, result) => {
+  Restaurant.findById(restaurandId).populate({
+    path: 'popularDishes',
+    populate: {
+      path: 'reviews',
+      populate: 'userId',
+    },
+  }).exec((err, result) => {
     if (err) {
       callback(err);
     } else {
