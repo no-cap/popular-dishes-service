@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const PhotoImage = styled.img`
   position: relative;
-  width: ${props.size === 'tooShort' ? '110%' : '100%'};
-  height: ${props.size === 'tooTall' ? '100%' : '120%'};
+  width: ${(props) => props.size === 'tooShort' ? '110%' : '100%'};
+  height: ${(props) => props.size === 'tooTall' ? '100%' : '120%'};
 `;
 
 export const Cropper = styled.div`
@@ -50,12 +50,12 @@ export const Price = styled.div`
   position: absolute;
   left: 120px;
   padding: 5px 6px 5px 6px;
-  background-color: ${props.primary ? 'transparent' : 'black'};
-  // margin-top: ${props.primary ? '-40' : '-90'}px;
-  opacity: ${props.primary ? 'none' : '65%'};
-  color: ${props.primary ? 'white' : 'transparent'};
+  background-color: ${(props) => props.primary ? 'transparent' : 'black'};
+  // margin-top: ${(props) => props.primary ? '-40' : '-90'}px;
+  opacity: ${(props) => props.primary ? 'none' : '65%'};
+  color: ${(props) => props.primary ? 'white' : 'transparent'};
   width: 50px;
   border-radius: 6px;
-  z-index: ${props.primary ? 1 : 0};
+  z-index: ${(props) => props.primary ? 1 : 0};
   white-space: normal;
 `;
