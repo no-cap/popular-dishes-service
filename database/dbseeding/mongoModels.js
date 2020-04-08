@@ -45,11 +45,6 @@ const reviewsSchema = new Schema({
   reviewText: String,
 });
 
-// const photosSchema = new Schema({
-//   url: { type: String, required: true },
-//   caption: String,
-// });
-
 const usersSchema = new Schema({
   username: String,
   userPhoto: String,
