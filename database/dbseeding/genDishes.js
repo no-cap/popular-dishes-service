@@ -9,27 +9,28 @@ const { Dish, Restaurant, Review, User } = require('./mongoModels.js');
 
 
 const randomNum = (min, max) => Math.floor((Math.random() * (max - min) + min));
-const NumberOfRestaurants = process.argv[2] || 15000;
-const DishesPerRestaurant = process.argv[3] || 4;
-const ReviewsPerDish = process.argv[4] || 2;
+const NumberOfRestaurants = parseInt(process.argv[2], 10) || 15000;
+const DishesPerRestaurant = parseInt(process.argv[3], 10) || 4;
+const ReviewsPerDish = parseInt(process.argv[4], 10) || 2;
 
 
 const multibar = new cliProgress.MultiBar({
-  format: '{bar} {percentage}% || {value}/{total} Documents || {name}',
+  format: '{bar} {percentage}% || ETA: {eta}s || {value}/{total} Documents || {name}',
   clearOnComplete: false,
   hideCursor: true,
   stopOnComplete: true,
 }, cliProgress.Presets.shades_grey);
 
-const Total = multibar.create(NumberOfRestaurants * DishesPerRestaurant * (ReviewsPerDish * 2), 0, { name: 'Total ' });
+const TotalRecords = NumberOfRestaurants + (NumberOfRestaurants * DishesPerRestaurant) + (NumberOfRestaurants * DishesPerRestaurant * (ReviewsPerDish * 2));
+const Total = multibar.create(TotalRecords, 0, { name: 'Total ' });
 const Restaurants = multibar.create(NumberOfRestaurants, 0, { name: 'Restaurants ' });
 const Dishes = multibar.create(NumberOfRestaurants * DishesPerRestaurant, 0, { name: 'Dishes ' });
 const Reviews = multibar.create(NumberOfRestaurants * DishesPerRestaurant * ReviewsPerDish, 0, { name: 'Reviews ' });
 const Users = multibar.create(NumberOfRestaurants * DishesPerRestaurant * ReviewsPerDish, 0, { name: 'Users ' });
 
 const adjective = ['Organic', 'Fresh', 'Family', 'Sweet', 'Savory', 'Super', 'Giant', 'Summer', 'Winter', 'Spring', 'BigOl', 'Tasty', 'Juicy', 'Vegan', 'Big', 'Delicious'];
-const cuisine = ['Italian', 'Thai', 'Indian', 'Polish', 'Lithuanian', 'Georgian', 'Sicilian', 'Moroccan', 'Vietnamese', 'Bulgarian', 'Chinese', 'Mexican', 'Russian', 'Slavic', 'European', 'French', 'Japanese', 'Korean', 'German', 'British'];
-const foodSingular = ['Burger', 'Sushi', 'Pizza', 'BBQ', 'Summer Salad', 'Casserole', 'Chili Bowl', 'Soup', 'Pie', 'Cake', 'Burrito', 'Taco', 'Salad', 'Pho', 'Chili', 'Momo', 'StirFry', 'FishNChips', 'MacNCheese', 'Pasta', 'Spaghetti'];
+const cuisine = ['Italian', 'Thai', 'Indian', 'Polish', 'Lithuanian', 'Georgian', 'Cuban', 'Sicilian', 'Moroccan', 'Vietnamese', 'Bulgarian', 'Chinese', 'Mexican', 'Russian', 'Slavic', 'European', 'French', 'Japanese', 'Korean', 'German', 'British'];
+const foodSingular = ['Burger', 'Cookie', 'Curry', 'Bowl', 'Enchilada', 'Poke', 'Bean', 'Sushi', 'Pizza', 'BBQ', 'Summer Salad', 'Casserole', 'Chili Bowl', 'Soup', 'Pie', 'Cake', 'Burrito', 'Taco', 'Salad', 'Pho', 'Chili', 'Momo', 'StirFry', 'FishNChips', 'MacNCheese', 'Pasta', 'Spaghetti'];
 const prefixes = [adjective, cuisine];
 const prefixSet = prefixes[randomNum(0, 2)]; // gives each record a random prefix set
 
