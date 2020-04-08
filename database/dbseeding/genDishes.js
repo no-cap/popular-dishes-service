@@ -1,6 +1,8 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-console */
+/* eslint-disable object-curly-newline */
 /* eslint-disable no-underscore-dangle */
 const faker = require('faker');
-const Promise = require('bluebird');
 const mongoose = require('mongoose');
 const cliProgress = require('cli-progress');
 const { Dish, Restaurant, Review, User } = require('./mongoModels.js');
@@ -13,7 +15,7 @@ const ReviewsPerDish = process.argv[4] || 2;
 
 
 const multibar = new cliProgress.MultiBar({
-  format: '{bar} {percentage}% || {value}/{total} Chunks || {name}',
+  format: '{bar} {percentage}% || {value}/{total} Documents || {name}',
   clearOnComplete: false,
   hideCursor: true,
   stopOnComplete: true,
@@ -25,9 +27,9 @@ const Dishes = multibar.create(NumberOfRestaurants * DishesPerRestaurant, 0, { n
 const Reviews = multibar.create(NumberOfRestaurants * DishesPerRestaurant * ReviewsPerDish, 0, { name: 'Reviews ' });
 const Users = multibar.create(NumberOfRestaurants * DishesPerRestaurant * ReviewsPerDish, 0, { name: 'Users ' });
 
-const adjective = ['Organic', 'Fresh', 'Family', 'Super', 'Giant', 'Summer', 'Winter', 'Spring', 'BigOl', 'Tasty', 'Juicy', 'Vegan', 'Big', 'Delicious'];
-const cuisine = ['Italian', 'Thai', 'Indian', 'Vietnamese', 'Bulgarian', 'Chinese', 'Mexican', 'Russian', 'Slavic', 'European', 'French', 'Japanese', 'Korean', 'German', 'British'];
-const foodSingular = ['Burger', 'Sushi', 'Pizza', 'Summer Salad', 'Casserole', 'Chili Bowl', 'Soup', 'Pie', 'Cake', 'Burrito', 'Taco', 'Salad', 'Pho', 'Chili', 'Momo', 'StirFry', 'FishNChips', 'MacNCheese', 'Pasta', 'Spaghetti'];
+const adjective = ['Organic', 'Fresh', 'Family', 'Sweet', 'Savory', 'Super', 'Giant', 'Summer', 'Winter', 'Spring', 'BigOl', 'Tasty', 'Juicy', 'Vegan', 'Big', 'Delicious'];
+const cuisine = ['Italian', 'Thai', 'Indian', 'Polish', 'Lithuanian', 'Georgian', 'Sicilian', 'Moroccan', 'Vietnamese', 'Bulgarian', 'Chinese', 'Mexican', 'Russian', 'Slavic', 'European', 'French', 'Japanese', 'Korean', 'German', 'British'];
+const foodSingular = ['Burger', 'Sushi', 'Pizza', 'BBQ', 'Summer Salad', 'Casserole', 'Chili Bowl', 'Soup', 'Pie', 'Cake', 'Burrito', 'Taco', 'Salad', 'Pho', 'Chili', 'Momo', 'StirFry', 'FishNChips', 'MacNCheese', 'Pasta', 'Spaghetti'];
 const prefixes = [adjective, cuisine];
 const prefixSet = prefixes[randomNum(0, 2)]; // gives each record a random prefix set
 

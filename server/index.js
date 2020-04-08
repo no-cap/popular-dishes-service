@@ -42,12 +42,13 @@ app.get('/api/restaurants/:restaurantId/nearby', (req, res) => {
 });
 
 app.get('/popularDishes/arrow.png', (req, res) => {
-  res.sendFile('/assets/arrow.png');
+  res.sendFile(path.join(__dirname, '/assets/arrow.png'));
 });
 
 app.get('/popularDishes/leftarrow.png', (req, res) => {
-  res.sendFile('/assets/leftarrow.png');
+  res.sendFile(path.join(__dirname, '/assets/leftarrow.png'));
 });
+
 
 /*
   * PUT ROUTES
@@ -72,3 +73,7 @@ app.delete('/api/dishes', (req, res) => {
 app.delete('/api/reviews', (req, res) => {
   Controller.deleteReview(req, res);
 });
+
+// app.get ('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/dist/'));
+// });
