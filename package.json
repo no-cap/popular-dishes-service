@@ -12,7 +12,7 @@
     "test": "jest",
     "start": "nodemon ./server/index.js",
     "react-dev": "webpack -w --mode production",
-    "seed": "node ./database/dataGenerator.js"
+    "gen:dishes": "node --max-old-space-size=13312 ./database/dbseeding/genDishes.js"
   },
   "repository": {
     "type": "git",
@@ -34,13 +34,17 @@
     "babel-preset-react": "^6.24.1",
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
+    "cli-progress": "^3.6.1",
     "dateformat": "^3.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "jquery": "^3.4.1",
+    "mongodb": "^3.5.5",
+    "mongoose": "^5.9.7",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.2",
+    "path": "^0.12.7",
     "puppeteer": "^2.1.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",

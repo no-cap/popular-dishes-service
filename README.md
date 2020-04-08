@@ -1,35 +1,37 @@
-# popular-dishes
-repo for the popular dishes component
+# PopularDishes
 
-Note: This component has not yet been refactored to work with Mongo.
+This project is the PopularDishes component to a restaurant review app. I inherited it, rebuilt the server on a Mongo database, and cleaned and refactored the front end.
 
-Requirements for generating dummy data using this component:
+## Related Projects
+Related projects can be found at: https://github.com/no-cap/
 
-An aws account
-A bucket with photos:
-    Preferably two folders:
-        One with Profile photos,
-        One with Food/Not Profile photo type photos
+## Table of Contents
 
-Step 1:
-npm i
+1. [Usage](#Usage)
+2. [Requirements](#requirements)
+3. [Development](#development)
 
-Step 2:
-We need dummy data.
-So to set that up.
-Go to ./database/index.js and change configuration for mysql connection.
+## Usage
 
-Step 3: 
-Load access and secret keys into config.example.json and rename to config.json
+The app should be fairly easy to use. Go through the following steps to get it setup:
+1. Run command **npm install**
+2. Create a .env file in the root directory with a similar structure to **example.env**
+3. Start the server with **npm start**
 
-Step 4: 
-Refactor the ./database/dataGenerator.js function called formatUrlKey to match your amazon bucket url along with bucket names, regions names and folder names.
+## Database Seeding
 
-Step5:
-Load Schema to mysql database and use node to run dataGenerator.js.
+To seed the database with fake data, you will first want to copt certain alterations to the *faker* source code. These are listed in **fakerAlteration.js**. 
+Next you need only run the following script in the root directory: **npm run gen:dishes <restaurants> <dishesPerRestaurant> <reviewsPerDish>**
+*example:* **npm run gen:dishes 10000 4 2**
 
-Step6:
-start server: type in terminal  --------> npm start
-start transpiler: type in terminal -----> npm run build:react;
+## Requirements
 
-Step7: open in browser.
+- Node
+- Mongo
+
+## Development
+
+### Installing Dependencies
+
+From within the root directory run: **npm install**
+
