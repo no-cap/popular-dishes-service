@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './client/src/index.js',
+  entry: './client/src/index.jsx',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, './client/dist'),
@@ -22,4 +22,10 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.jsx', '.css'],
   },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  },
+  devtool: 'source-map',
 };
