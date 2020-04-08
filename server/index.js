@@ -54,11 +54,11 @@ app.get('/popularDishes/leftarrow.png', (req, res) => {
   * PUT ROUTES
 */
 
-app.put('/api/dishes/', (req, res) => {
+app.put('/api/dishes', (req, res) => {
   Controller.putDish(req, res);
 });
 
-app.put('/api/reviews/', (req, res) => {
+app.put('/api/reviews', (req, res) => {
   Controller.putReview(req, res);
 });
 
@@ -73,7 +73,3 @@ app.delete('/api/dishes', (req, res) => {
 app.delete('/api/reviews', (req, res) => {
   Controller.deleteReview(req, res);
 });
-
-// app.get ('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/dist/'));
-// });
