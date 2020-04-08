@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import $ from 'jquery';
 import Modal from '../Modal/Modal';
 import FullMenu from '../FullMenu/FullMenu';
 import PopularDishList from '../PopularDishList/PopularDishList';
@@ -7,61 +7,41 @@ import { CloseButton, ModalStyle, CloseFormat } from '../Modal/ModalStyles';
 import { AppBody, Title, AllItems } from './AppStyles';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       items: [],
+      // eslint-disable-next-line no-undef
+      restaurantId: '5e8bc7592e5c082644927438',
       restaurant: null,
       visibleMenu: false,
+      popularDishes: [],
     };
-    this.getItems = this.getItems.bind(this);
-    this.getPhotos = this.getPhotos.bind(this);
+    this.getDishes = this.getDishes.bind(this);
     this.showMenu = this.showMenu.bind(this);
     this.outsideModalHandler = this.outsideModalHandler.bind(this);
   }
 
   componentDidMount() {
-    axios.get('popularDishes/getCompany')
-      .then((response) => {
-        this.setState({ restaurant: response.data[0] });
-        this.getItems(response.data[0].restaurant_id);
-      }) // with the restaurant_id get the popular items
-      .then(() => {
-        this.setState({ doneLoading: true });
-      });
+    const { restaurantId } = this.state;
+    this.getDishes(restaurantId);
   }
 
-  getReviews(obj, dish_id) {
-    axios.get('popularDishes/getReviews', { params: { dish_id, numberOfReviews: obj.item.review_count } })
-      .then((response) => {
-        obj.reviews = response.data;
-        this.setState({ items: this.state.items.concat(obj) });
+  getDishes(restaurantId) {
+    $.get(`http://localhost:3000/api/restaurants/${restaurantId}`, (data) => {
+      console.log(data);
+      const { _id, restaurantName, popularDishes } = data;
+      const tempDishes = popularDishes.map((dish) => {
+        dish.photos = dish.reviews.map((review) => review.photoUrl);
+        return dish;
       });
-  }
-
-  getPhotos(item, dish_id) {
-    axios.get('popularDishes/getPhotos', { params: { dish_id } })
-      .then((response) => {
-        const obj = {};
-        obj.item = item;
-        obj.photos = response.data;
-        // this.setState({ items: this.state.items.concat(obj) });
-        this.getReviews(obj, dish_id);
-      });
-  }
-
-  getItems(number) {
-    axios.get('popularDishes/getItems', { params: { restaurant_id: number } })
-      .then((response) => {
-        const items = response.data;
-        for (let i = 0; i < items.length; i += 1) {
-          this.getPhotos(items[i], items[i].dish_id);
-        }
-      });
+      this.setState((state) => ({ ...state, restaurantId: _id, restaurantName, popularDishes: tempDishes }));
+    });
   }
 
   showMenu() {
-    this.setState({ visibleMenu: !this.state.visibleMenu });
+    const { visibleMenu } = this.state;
+    this.setState((state) => ({ ...state, visibleMenu: !visibleMenu }));
   }
 
   outsideModalHandler(e) {
@@ -76,28 +56,24 @@ class App extends React.Component {
 
   render() {
     // <Star />
+    const { restaurantName, popularDishes, visibleMenu } = this.state;
+    const modal = (
+      <Modal>
+        <ModalStyle className="modal" onClick={this.outsideModalHandler}>
+          <CloseButton className="closeIt" onClick={this.showMenu}>
+            <CloseFormat id="closeModal">Close</CloseFormat>
+            &#x2715;
+          </CloseButton>
+          <FullMenu restaurant={restaurantName} popularDishes={popularDishes} handleKeyPress={this.handleKeyPress} />
+        </ModalStyle>
+      </Modal>
+    );
     return (
       <AppBody>
-        {(true)
-          ? (
-            <div>
-              <Title>Popular Dishes</Title>
-              <AllItems onClick={this.showMenu}> View Full Menu </AllItems>
-              <PopularDishList popularDishes={this.state.items} />
-              {(this.state.visibleMenu) ? (
-                <Modal>
-                  <ModalStyle className="modal" onClick={this.outsideModalHandler}>
-                    <CloseButton className="closeIt" onClick={this.showMenu}>
-                      <CloseFormat id="closeModal">Close</CloseFormat>
-                      &#x2715;
-                    </CloseButton>
-                    <FullMenu restaurant={this.state.restaurant.restaurant_name} items={this.state.items} handleKeyPress={this.handleKeyPress} />
-                  </ModalStyle>
-                </Modal>
-              ) : null}
-            </div>
-          )
-          : null}
+        <Title>Popular Dishes</Title>
+        <AllItems onClick={this.showMenu}>View Full Menu</AllItems>
+        <PopularDishList popularDishes={popularDishes} />
+        {visibleMenu ? modal : null}
       </AppBody>
     );
   }
