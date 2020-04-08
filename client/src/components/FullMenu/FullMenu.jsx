@@ -1,8 +1,9 @@
 import React from 'react';
-import MenuItem from './menuItem.jsx';
-import { FullMenuFormat } from './FullMenuStyles.jsx';
+import MenuItem from '../MenuItem/MenuItem';
+import { FullMenuFormat } from './FullMenuStyles';
 
 class FullMenu extends React.Component {
+  // eslint-disable-next-line no-useless-constructor
   constructor(props) {
     super(props);
   }
@@ -16,10 +17,11 @@ class FullMenu extends React.Component {
   }
 
   render() {
+    const { restaurantName, popularDishes } = this.props;
     return (
       <FullMenuFormat>
-        <h3><strong>Menu for {this.props.restaurant}</strong></h3>
-        {this.props.items.map((data) => <MenuItem data={data} />)}
+        <h3><strong>Menu for {restaurantName}</strong></h3>
+        {popularDishes.map((dish) => <MenuItem dish={dish} />)}
       </FullMenuFormat>
     );
   }
