@@ -7,7 +7,7 @@ const restaurantsSchema = new Schema({
   restaurantName: { type: String, required: true },
   popularDishes: [{
     type: Schema.Types.ObjectId,
-    ref: 'popularDishes',
+    ref: 'dishes',
   }],
 });
 
@@ -29,7 +29,7 @@ const dishesSchema = new Schema({
 const reviewsSchema = new Schema({
   dishId: {
     type: Schema.Types.ObjectId,
-    ref: 'popularDishes',
+    ref: 'dishes',
     required: true,
   },
   userId: {
