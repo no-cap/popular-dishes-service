@@ -2,7 +2,7 @@ const faker = require('faker');
 
 const numberOfRestaurants = parseInt(process.argv[4], 10) || 100;
 const numberOfDishes = parseInt(process.argv[4], 10) || 100;
-const numberOfUsers = parseInt(process.argv[4], 10) || 100;
+const numberOfUsers = parseInt(process.argv[5], 10) || 100;
 const randomNum = (min, max) => Math.floor((Math.random() * (max - min) + min));
 const adjective = ['Organic', 'Fresh', 'Ketchupy', 'Garlicy', 'Roasted', 'Grilled', 'Fried', 'DeepFried', 'Grilled', 'Family', 'Sweet', 'Savory', 'Super', 'Giant', 'Summer', 'Winter', 'Spring', 'BigOl', 'Tasty', 'Juicy', 'Vegan', 'Big', 'Delicious'];
 const cuisine = ['Italian', 'Thai', 'Indian', 'Japanese', 'Canadian', 'German', 'French', 'Spanish', 'Ethiopian', 'Arabian', 'Polish', 'Lithuanian', 'Georgian', 'Cuban', 'Sicilian', 'Moroccan', 'Vietnamese', 'Bulgarian', 'Chinese', 'Mexican', 'Russian', 'Slavic', 'European', 'French', 'Japanese', 'Korean', 'German', 'British'];
