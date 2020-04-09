@@ -11,7 +11,7 @@ const model = process.argv[2] === 'restaurants' ? restaurant
         : restaurant;
 
 const numberOfRecords = parseInt(process.argv[3], 10);
-const isContinuation = process.argv[5] || false;
+const isContinuation = process.argv[6] || false;
 
 // create new progress bar for command line visualization
 const ProgressBar = new cliProgress.SingleBar({
@@ -21,7 +21,7 @@ const ProgressBar = new cliProgress.SingleBar({
 ProgressBar.start(numberOfRecords, 0);
 
 // filePath to be passed to createWriteStream
-const filePath = `../${model.table}7.csv`;
+const filePath = `../${model.table}.csv`;
 
 // This function takes an array and turns it into a string without brackets or trailing comma
 const trimArray = (array) => {
