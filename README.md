@@ -26,9 +26,10 @@ Next you need only run the following script in the root directory:
 *example:* **npm run gen:dishes 10000 4 2**
 
 For PostgreSQL, the script is made to write CSV files for each table which you will then need to import into your database. To generate the CSV files:
-*FOR POSTGRES* **npm run gen:csv <numberOfRecords> <table> <foreignKeyRange> <isContinuation?>**
+*FOR POSTGRES* **npm run gen:csv <table> <numberOfRecords> <foreignKeyRange> <isContinuation?>**
 *example:* **npm run gen:csv reviews 100000000 10000000**
 The above example will generate 10,000,000 review records for the 'reviews' table all with foreign restaurant/user keys between 1 and 10,000,000.
+The *isContinuation* variable only determines whether or not to write headers. Any value passed in will turn off headers.
 
 ## Requirements
 
