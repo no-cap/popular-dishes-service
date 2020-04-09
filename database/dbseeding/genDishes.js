@@ -73,7 +73,7 @@ const someReviews = (dish) => {
   const reviews = [];
   for (let i = 0; i < dish.reviews.length; i += 1) {
     reviews.push(new Review({
-      _id: dish.reviews[i]._id,
+      _id: dish.reviews[i],
       dishId: dish._id,
       userId: genIDs(1)[0],
       photoUrl: `https://sdc-food.s3-us-west-1.amazonaws.com/${randomNum(0, 738)}.jpg`,
