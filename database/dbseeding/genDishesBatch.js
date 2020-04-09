@@ -123,7 +123,7 @@ generateSet();
 
 MongoClient.connect(process.env.MONGO_HOST, { useUnifiedTopology: true }, (err, client) => {
   if (err) console.error(`Failed to connect to database:\n${err}`);
-  else console.log(`Successfully connected to ${process.env.MONGOHOST}`);
+  else console.log(`Successfully connected to ${process.env.MONGO_HOST}`);
   const db = client.db(process.env.MONGO_DB);
 
   // Initialize unordered Batches
