@@ -3,7 +3,6 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-underscore-dangle */
 const faker = require('faker');
-const cliProgress = require('cli-progress');
 const { ObjectID, MongoClient } = require('mongodb');
 require('dotenv').config();
 
@@ -12,32 +11,19 @@ const NumberOfRestaurants = parseInt(process.argv[2], 10) || 15000;
 const DishesPerRestaurant = parseInt(process.argv[3], 10) || 4;
 const ReviewsPerDish = parseInt(process.argv[4], 10) || 2;
 
-
-// const multibar = new cliProgress.MultiBar({
-//   format: '{bar} {percentage}% || ETA: {eta}s || {value}/{total} Documents || {name}',
-//   clearOnComplete: false,
-//   hideCursor: true,
-//   stopOnComplete: true,
-// }, cliProgress.Presets.shades_grey);
-
-// const TotalRecords = NumberOfRestaurants + (NumberOfRestaurants * DishesPerRestaurant) + (NumberOfRestaurants * DishesPerRestaurant * (ReviewsPerDish * 2));
-// const Total = multibar.create(TotalRecords, 0, { name: 'Total ' });
-// const Restaurants = multibar.create(NumberOfRestaurants, 0, { name: 'Restaurants ' });
-// const Dishes = multibar.create(NumberOfRestaurants * DishesPerRestaurant, 0, { name: 'Dishes ' });
-// const Reviews = multibar.create(NumberOfRestaurants * DishesPerRestaurant * ReviewsPerDish, 0, { name: 'Reviews ' });
-// const Users = multibar.create(NumberOfRestaurants * DishesPerRestaurant * ReviewsPerDish, 0, { name: 'Users ' });
-
 const adjective = ['Organic', 'Fresh', 'Ketchupy', 'Garlicy', 'Roasted', 'Grilled', 'Fried', 'DeepFried', 'Grilled', 'Family', 'Sweet', 'Savory', 'Super', 'Giant', 'Summer', 'Winter', 'Spring', 'BigOl', 'Tasty', 'Juicy', 'Vegan', 'Big', 'Delicious'];
 const cuisine = ['Italian', 'Thai', 'Indian', 'Japanese', 'Canadian', 'German', 'French', 'Spanish', 'Ethiopian', 'Arabian', 'Polish', 'Lithuanian', 'Georgian', 'Cuban', 'Sicilian', 'Moroccan', 'Vietnamese', 'Bulgarian', 'Chinese', 'Mexican', 'Russian', 'Slavic', 'European', 'French', 'Japanese', 'Korean', 'German', 'British'];
 const foodSingular = ['Burger', 'Cookie', 'Curry', 'Bowl', 'Enchilada', 'Poke', 'Bean', 'Sushi', 'Pizza', 'BBQ', 'Summer Salad', 'Casserole', 'Chili Bowl', 'Soup', 'Pie', 'Cake', 'Burrito', 'Taco', 'Salad', 'Pho', 'Chili', 'Momo', 'StirFry', 'FishNChips', 'MacNCheese', 'Pasta', 'Spaghetti'];
 const prefixes = [adjective, cuisine];
 const prefixSet = prefixes[randomNum(0, 2)]; // gives each record a random prefix set
 
+// Create containers for each record, these will later be add to bulk insertion ops
 const allRestaurants = [];
 const allDishes = [];
 const allReviews = [];
 const allUsers = [];
 
+// Generates a set of unique Ids
 const genIDs = (num) => {
   const IDs = [];
   for (let i = 0; i < num; i += 1) {
@@ -60,6 +46,7 @@ const someRestaurants = () => {
   return restaurants;
 };
 
+// Takes a restaurant and creates a set of popular dishes for that restaurant from its IDs
 const someDishes = (restaurant) => {
   const dishes = [];
   for (let i = 0; i < DishesPerRestaurant; i += 1) {
@@ -133,7 +120,7 @@ MongoClient.connect(process.env.MONGO_HOST, { useUnifiedTopology: true }, (err, 
   const usersBatch = db.collection('users').initializeUnorderedBulkOp({ useLegacyOps: true });
   const allBatches = [restaurantsBatch, dishesBatch, reviewsBatch, usersBatch];
 
-  // Add some operations to be executed in order
+  // Add some operations to be appropriate batches...
   allRestaurants.forEach((restaurant) => {
     restaurantsBatch.insert(restaurant);
   });
@@ -146,12 +133,19 @@ MongoClient.connect(process.env.MONGO_HOST, { useUnifiedTopology: true }, (err, 
   allUsers.forEach((user) => {
     usersBatch.insert(user);
   });
-
+  // And execute batches...
+  let successfulBatchInsertions = 0;
   allBatches.forEach((batch) => {
     batch.execute((err, result) => {
       if (err) console.error(err);
       // Check state of result
       console.log(`Inserted ${result.nInserted} records`);
+      successfulBatchInsertions += 1;
+      // 4 successful insertions means all records have been inserted.
+      if (successfulBatchInsertions === 4) {
+        client.close();
+        // process.exit(1);
+      }
     });
   });
 });
