@@ -1,11 +1,9 @@
-const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
 const db = require('../mongoConnect.js');
-
-const { Schema } = mongoose;
 
 const restaurantsSchema = new Schema({
   restaurantName: { type: String, required: true },
-  popularDishes: [{
+  dishes: [{
     type: Schema.Types.ObjectId,
     ref: 'dishes',
   }],
@@ -59,4 +57,3 @@ module.exports.Restaurant = db.model('restaurants', restaurantsSchema);
 module.exports.Dish = db.model('dishes', dishesSchema);
 module.exports.Review = db.model('reviews', reviewsSchema);
 module.exports.User = db.model('users', usersSchema);
-// module.exports.Photo = model('photos', photosSchema);
