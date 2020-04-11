@@ -50,7 +50,7 @@ class PopularDishEntry extends React.Component {
         <PopularDish className="popper">
           <Cropper>
             {(photos.length > 0)
-              ? <PhotoImage src={photos[0].url} size={this.handleBlackSpace(photos[0].url)} className="popper" />
+              ? <PhotoImage src={photos[0]} size={this.handleBlackSpace(photos[0])} className="popper" />
               : <PhotoImage src={notFound} size={this.handleBlackSpace(notFound)} className="popper" />}
           </Cropper>
           <PopularDishText className="popper">
