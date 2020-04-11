@@ -10,7 +10,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon ./server/index.js",
+    "start": "node ./server/index.js",
     "react-dev": "webpack -w --mode production",
     "gen:dishes": "node --max-old-space-size=13312 ./database/dbseeding/genDishes.js",
     "gen:dishes:batch": "node --max-old-space-size=13312 ./database/dbseeding/genDishesBatch.js",
@@ -45,6 +45,7 @@
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
     "mysql": "^2.18.1",
+    "newrelic": "^6.5.0",
     "nodemon": "^2.0.2",
     "path": "^0.12.7",
     "pg": "^8.0.0",
