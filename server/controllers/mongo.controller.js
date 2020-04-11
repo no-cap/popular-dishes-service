@@ -38,7 +38,6 @@ module.exports.postReview = (req, res) => {
 
 // /api/restaurants/:restaurantID
 module.exports.getDishes = (restaurantId, res) => {
-  console.log('GET /api/restaurants/');
   Model.getDishes(restaurantId, (err, results) => {
     if (err) {
       console.log(err);
