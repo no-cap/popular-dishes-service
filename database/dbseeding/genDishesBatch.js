@@ -8,8 +8,6 @@ require('dotenv').config();
 
 const randomNum = (min, max) => Math.floor((Math.random() * (max - min) + min));
 const NumberOfRestaurants = parseInt(process.argv[2], 10) || 15000;
-const DishesPerRestaurant = parseInt(process.argv[3], 10) || 4;
-const ReviewsPerDish = parseInt(process.argv[4], 10) || 2;
 
 const adjective = ['Organic', 'Edible', 'Tart', 'Hot', 'Spicy', 'SweetNSour', 'Savoury', 'Bittersweet', 'Seasoned', 'Fresh', 'Ketchupy', 'Garlicy', 'Roasted', 'Grilled', 'Fried', 'DeepFried', 'Grilled', 'Family', 'Sweet', 'Savory', 'Super', 'Giant', 'Summer', 'Winter', 'Wasabi', 'Whipped', 'Spring', 'BigOl', 'Tasty', 'BiteSize', 'Blended', 'Aged', 'Boiled', 'Candied', 'Carmelized', 'CharBroiled', 'Chocolate', 'Delectable', 'Delightful', 'Famous', 'Flaky', 'Fluffy', 'Frozen', 'Ginger', 'Golden', 'Toasted', 'Hearty', 'Hot', 'Intense', 'Jumbo', 'Mini', 'Lavish', 'Lite', 'Lukewarm', 'MouthWatering', 'Natural', 'Peppery', 'Peppered', 'Blackened', 'Pickled', 'Poached', 'Scrumptious', 'Silky', 'Smoked', 'Smoky', 'Smooth', 'Sprinkled', 'Steamy', 'Steamed', 'Succulent', 'Sugary', 'Strawberry', 'Sweetened', 'Thin', 'Thick', 'Fat', 'Traditional', 'Velvety', 'Zesty', 'Zingy', 'Crisp', 'Crispy', 'Crumbly', 'Crunchy', 'Sour', 'Juicy', 'Vegan', 'Big', 'Delicious'];
 const cuisine = ['Italian', 'Southern', 'Cajun', 'Lebanese', 'Jamaican', 'Tunisian', 'Danish', 'Belgian', 'Indonesian', 'Swedish', 'Norwegian', 'Soul', 'British', 'Haute', 'Armenian', 'Vegetarian', 'Chilean', 'Hawaiian', 'Mediterranean', 'Greek', 'American', 'Fusion', 'Peruvian', 'Argentinian', 'Thai', 'Indian', 'Japanese', 'Canadian', 'German', 'French', 'Spanish', 'Ethiopian', 'Arabian', 'Polish', 'Lithuanian', 'Georgian', 'Cuban', 'Sicilian', 'Moroccan', 'Vietnamese', 'Bulgarian', 'Chinese', 'Mexican', 'Russian', 'Slavic', 'European', 'French', 'Japanese', 'Korean', 'German', 'Turkish', 'Samoan', 'Filipino', 'Cambodian', 'Burmese', 'Pakistani', 'Afghan', 'Persian', 'Iranian', 'British'];
@@ -38,7 +36,7 @@ const someRestaurants = () => {
     const newRestaurant = {
       _id: new ObjectID(),
       restaurantName: faker.company.companyName(),
-      popularDishes: genIDs(DishesPerRestaurant),
+      dishes: genIDs(randomNum(0, 8)),
     };
     restaurants.push(newRestaurant);
     allRestaurants.push(newRestaurant);
@@ -49,14 +47,14 @@ const someRestaurants = () => {
 // Takes a restaurant and creates a set of popular dishes for that restaurant from its IDs
 const someDishes = (restaurant) => {
   const dishes = [];
-  for (let i = 0; i < DishesPerRestaurant; i += 1) {
+  for (let i = 0; i < restaurant.dishes.length; i += 1) {
     const newDish = {
-      _id: restaurant.popularDishes[i],
+      _id: restaurant.dishes[i],
       dishName: `${prefixSet[randomNum(0, prefixSet.length)]} ${foodSingular[randomNum(0, foodSingular.length)]}`,
       price: `${randomNum(6, 25)}.${randomNum(80, 100)}`,
       description: `${faker.lorem.words()} ${faker.lorem.words()}`,
       restaurantId: restaurant._id,
-      reviews: genIDs(ReviewsPerDish),
+      reviews: genIDs(randomNum(0, 8)),
     };
     dishes.push(newDish);
     allDishes.push(newDish);
