@@ -38,7 +38,10 @@ module.exports.postReview = (review, callback) => {
         if (err) {
           callback(err);
         } else {
-          callback(null, result);
+          Restaurant.findByIdAndUpdate(result.restaurandId, { $push: { dishes: result._id } }, (err, result) => {
+            if (err) callback(err);
+            else callback(null, result);
+          });
         }
       });
     }
@@ -49,21 +52,42 @@ module.exports.postReview = (review, callback) => {
   * GET ROUTES
 */
 
-// /api/restaurants/:restaurantID/dishes
-module.exports.getDishes = (restaurandId, callback) => {
-  Restaurant.findById(restaurandId).populate({
-    path: 'dishes',
-    populate: {
-      path: 'reviews',
-      populate: 'userId',
-    },
-  }).exec((err, result) => {
+// /api/restaurants/:restaurantID
+// module.exports.getDishes = (restaurandId, callback) => {
+//   Restaurant.findById(restaurandId).lean().populate({
+//     path: 'dishes',
+//     populate: {
+//       path: 'reviews',
+//       populate: 'userId',
+//     },
+//   }).exec((err, result) => {
+//     if (err) {
+//       callback(err);
+//     } else {
+//       callback(null, result);
+//     }
+//   });
+// };
+
+module.exports.getRestaurant = (restaurandId, callback) => {
+  Restaurant.findById(restaurandId, (err, result) => {
     if (err) {
       callback(err);
     } else {
       callback(null, result);
     }
-  });
+  }).lean();
+};
+
+// /api/users/:userId
+module.exports.getUser = (userId, callback) => {
+  User.findById(userId, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, result);
+    }
+  }).lean();
 };
 
 // /api/restaurants/:restaurantID/nearby
