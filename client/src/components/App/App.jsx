@@ -12,7 +12,7 @@ class App extends React.Component {
     this.state = {
       items: [],
       // eslint-disable-next-line no-undef
-      restaurantId: '5e8fedb27825500e6049d013',
+      restaurantId: '5e92696964027734e0a2063a',
       restaurant: null,
       visibleMenu: false,
       popularDishes: [],
