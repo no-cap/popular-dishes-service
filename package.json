@@ -13,7 +13,7 @@
     "start": "node ./server/index.js",
     "react-dev": "webpack -w --mode production",
     "gen:dishes": "node --max-old-space-size=13312 ./database/dbseeding/genDishes.js",
-    "gen:dishes:batch": "node --max-old-space-size=13312 ./database/dbseeding/genDishesBatch.js",
+    "gen:dishes:batch": "node --max-old-space-size=13312 ./database/dbseeding/genDishesBatch.copy.js",
     "gen:csv": "node --max-old-space-size=13312 ./database/dbseeding/writeAllToCSV.js"
   },
   "repository": {
