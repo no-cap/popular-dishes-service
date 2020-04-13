@@ -72,7 +72,7 @@ class PhotoBox extends React.Component {
           ? (
             <div>
               <PhotoBoxFormat>
-                <PhotoImage src={this.props.photos[this.state.currentPhoto].url} size={this.handleBlackSpace(this.props.photos[this.state.currentPhoto].url)} />
+                <PhotoImage src={this.props.photos[this.state.currentPhoto]} size={this.handleBlackSpace(this.props.photos[this.state.currentPhoto])} />
               </PhotoBoxFormat>
               <LeftArrow onClick={this.onClickHandler} />
               <RightArrow onClick={this.onClickHandler} className="button right" />

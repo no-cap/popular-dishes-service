@@ -4,3 +4,4 @@ config.json
 .vscode
 client/dist/bundle.js
 client/dist/bundle.js.map
+newrelic_agent.log

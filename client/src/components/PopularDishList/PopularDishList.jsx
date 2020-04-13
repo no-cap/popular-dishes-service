@@ -3,7 +3,7 @@ import $ from 'jquery';
 import PopularDishEntry from '../PopularDishEntry/PopularDishEntry';
 import Modal from '../Modal/Modal';
 import PopUpComponent from '../PopUpComponent/PopUpComponent';
-import { Slider, Slide, GoLeft, GoRight, NextDish, LastDish, DishArrowRight, DishArrowLeft } from './PopularDishList-style';
+import { Slider, Slide, GoLeft, GoRight, NextDish, LastDish, DishArrowRight, DishArrowLeft } from './PopularDishListStyles';
 import { CloseButton, ModalStyle, CloseFormat, DishButtons } from '../Modal/ModalStyles';
 
 const notFound = 'https://www.yorkshirecareequipment.com/wp-content/uploads/2018/09/no-image-available.jpg';
@@ -98,7 +98,7 @@ class PopularDishList extends React.Component {
       <div>
         <Slider className="slider" onScroll={this.onChangeHandler}>
           {popularDishes.map((dish) => (
-            <Slide id={dish._id}>
+            <Slide id={dish.dishName}>
               <PopularDishEntry dish={dish} photos={dish.photos} buttonHandler={this.setView} />
             </Slide>
           ))}

@@ -12,7 +12,7 @@ class App extends React.Component {
     this.state = {
       items: [],
       // eslint-disable-next-line no-undef
-      restaurantId: '5e8bc7592e5c082644927438',
+      restaurantId: '5e92696964027734e0a2063a',
       restaurant: null,
       visibleMenu: false,
       popularDishes: [],
@@ -29,9 +29,8 @@ class App extends React.Component {
 
   getDishes(restaurantId) {
     $.get(`http://localhost:3000/api/restaurants/${restaurantId}`, (data) => {
-      console.log(data);
-      const { _id, restaurantName, popularDishes } = data;
-      const tempDishes = popularDishes.map((dish) => {
+      const { _id, restaurantName, dishes } = data;
+      const tempDishes = dishes.map((dish) => {
         dish.photos = dish.reviews.map((review) => review.photoUrl);
         return dish;
       });

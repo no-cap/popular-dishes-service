@@ -21,8 +21,15 @@ The app should be fairly easy to use. Go through the following steps to get it s
 ## Database Seeding
 
 To seed the database with fake data, you will first want to copt certain alterations to the *faker* source code. These are listed in **fakerAlteration.js**. 
-Next you need only run the following script in the root directory: **npm run gen:dishes <restaurants> <dishesPerRestaurant> <reviewsPerDish>**
+Next you need only run the following script in the root directory: 
+*FOR MONGO* **npm run gen:dishes <restaurants> <dishesPerRestaurant> <reviewsPerDish>**
 *example:* **npm run gen:dishes 10000 4 2**
+
+For PostgreSQL, the script is made to write CSV files for each table which you will then need to import into your database. To generate the CSV files:
+*FOR POSTGRES* **npm run gen:csv <table> <numberOfRecords> <foreignKeyRange> <isContinuation?>**
+*example:* **npm run gen:csv reviews 100000000 10000000**
+The above example will generate 10,000,000 review records for the 'reviews' table all with foreign restaurant/user keys between 1 and 10,000,000.
+The *isContinuation* variable only determines whether or not to write headers. Any value passed in will turn off headers.
 
 ## Requirements
 

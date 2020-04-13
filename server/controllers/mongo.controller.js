@@ -6,7 +6,7 @@ const Model = require('../models/mongo.model.js');
   * POST ROUTES
 */
 
-// /api/dishes
+// /api/restaurants/:restaurantID/dishes
 module.exports.postDish = (req, res) => {
   const newDish = req.body;
   Model.postDish(newDish, (err, result) => {
@@ -19,7 +19,7 @@ module.exports.postDish = (req, res) => {
   });
 };
 
-// /api/reviews
+// /api/restaurants/:restaurantID/dishes/:dishID/reviews
 module.exports.postReview = (req, res) => {
   const newReview = req.body;
   Model.postReview(newReview, (err, result) => {
@@ -37,14 +37,25 @@ module.exports.postReview = (req, res) => {
 */
 
 // /api/restaurants/:restaurantID
-module.exports.getDishes = (restaurantId, res) => {
-  console.log('GET /api/restaurants/');
-  Model.getDishes(restaurantId, (err, results) => {
+module.exports.getRestaurant = (restaurantId, res) => {
+  Model.getRestaurant(restaurantId, (err, results) => {
     if (err) {
       console.log(err);
       res.status(400).send();
     } else {
       res.status(200).send(results);
+    }
+  });
+};
+
+// /api/users/:userID
+module.exports.getUser = (userId, res) => {
+  Model.getUser(userId, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send();
+    } else {
+      res.status(200).send(result);
     }
   });
 };

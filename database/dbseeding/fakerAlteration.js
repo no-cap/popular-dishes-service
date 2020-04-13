@@ -2,20 +2,27 @@
 
 const pathToCompany = 'faker/lib/company.js';
 this.companyName = function (format) {
-  const adjective = ["Organic", "Fresh", "Family", "Super", "Giant", "BigOl", "Tasty", "Juicy", "Vegan", "Big", "Delicious"];
-  const cuisine = ["Italian", "Thai", "Indian", "Vietnamese", "Bulgarian", "Chinese", "Mexican", "Russian", "Slavic", "European", "French", "Japanese", "Korean", "German", "British"];
-  const foodSingular = ["Burger", "Sushi", "Pizza", "Casserole", "Chili Bowl", "Soup", "Pie", "Cake", "Burrito", "Taco", "Salad", "Pho", "Chili", "Momo", "StirFry", "FishNChips", "MacNCheese", "Pasta", "Spaghetti"];
+  const adjective = ['Organic', 'Edible', 'Tart', 'Hot', 'Spicy', 'SweetNSour', 'Savoury', 'Bittersweet', 'Seasoned', 'Fresh', 'Ketchupy', 'Garlicy', 'Roasted', 'Grilled', 'Fried', 'DeepFried', 'Grilled', 'Family', 'Sweet', 'Savory', 'Super', 'Giant', 'Summer', 'Winter', 'Wasabi', 'Whipped', 'Spring', 'BigOl', 'Tasty', 'BiteSize', 'Blended', 'Aged', 'Boiled', 'Candied', 'Carmelized', 'CharBroiled', 'Chocolate', 'Delectable', 'Delightful', 'Famous', 'Flaky', 'Fluffy', 'Frozen', 'Ginger', 'Golden', 'Toasted', 'Hearty', 'Hot', 'Intense', 'Jumbo', 'Mini', 'Lavish', 'Lite', 'Lukewarm', 'MouthWatering', 'Natural', 'Peppery', 'Peppered', 'Blackened', 'Pickled', 'Poached', 'Scrumptious', 'Silky', 'Smoked', 'Smoky', 'Smooth', 'Sprinkled', 'Steamy', 'Steamed', 'Succulent', 'Sugary', 'Strawberry', 'Sweetened', 'Thin', 'Thick', 'Fat', 'Traditional', 'Velvety', 'Zesty', 'Zingy', 'Crisp', 'Crispy', 'Crumbly', 'Crunchy', 'Sour', 'Juicy', 'Vegan', 'Big', 'Delicious'];
+  const cuisine = ['Italian', 'Southern', 'Cajun', 'Lebanese', 'Jamaican', 'Tunisian', 'Danish', 'Belgian', 'Indonesian', 'Swedish', 'Norwegian', 'Soul', 'British', 'Haute', 'Armenian', 'Vegetarian', 'Chilean', 'Hawaiian', 'Mediterranean', 'Greek', 'American', 'Fusion', 'Peruvian', 'Argentinian', 'Thai', 'Indian', 'Japanese', 'Canadian', 'German', 'French', 'Spanish', 'Ethiopian', 'Arabian', 'Polish', 'Lithuanian', 'Georgian', 'Cuban', 'Sicilian', 'Moroccan', 'Vietnamese', 'Bulgarian', 'Chinese', 'Mexican', 'Russian', 'Slavic', 'European', 'French', 'Japanese', 'Korean', 'German', 'Turkish', 'Samoan', 'Filipino', 'Cambodian', 'Burmese', 'Pakistani', 'Afghan', 'Persian', 'Iranian', 'British'];
+  const foodSingular = ['Burger', 'Chow', 'Grub', 'Avocado', 'Breakfast', 'Lunch', 'Dinner', 'BlackBeans', 'Brunch', 'Buckwheat', 'Broccoli', 'BoysenberryPie', 'Brownie', 'Cheesecake', 'Cereal', 'Carrots', 'Coffee', 'Chickpeas', 'Falafel', 'Schwarma', 'CollardGreens', 'Corn', 'Doughnut', 'Eggplant', 'FrenchFries', 'Mushroom', 'Granola', 'Lettuce', 'HoneyDew', 'Jackfruit', 'Kumquat', 'Loquat', 'Lemonade', 'Maize', 'Milkshake', 'Mochi', 'Noodles', 'Omelet', 'Pineapple', 'PeanutButter', 'Persimmon', 'PotRoast', 'Picnic', 'Pretzel', 'Edamame', 'SplitPeas', 'Stew', 'Porridge', 'Squash', 'Supper', 'SweetPotato', 'Turnips', 'Cookie', 'Curry', 'Bowl', 'Enchilada', 'Poke', 'Bean', 'Sushi', 'Pizza', 'BBQ', 'Summer Salad', 'Casserole', 'Chili Bowl', 'Soup', 'Pie', 'Cake', 'Burrito', 'Taco', 'Salad', 'Pho', 'Chili', 'Momo', 'StirFry', 'FishNChips', 'MacNCheese', 'Pasta', 'Spaghetti'];
   const foodPlural = ["Burgers", "Burritos", "Country Dumplins", "Grits", "Tacos", "Salads", "Dumplings", "Soups", "Pies", "Cakes", "Smoothies"];
   const place = ["Bar", "Restaurant", "Buffet", "Hub", "Spot", "Corner", "Avenue", "Street", "Table", "Diner", "Cafe", "Bistro"];
   const random = (array) => (array[faker.random.number({ min: 0, max: array.length - 1, precision: 1 })]);
 
+  
+
   var formats = [
     `{{name.lastName}}s ${random(cuisine)} ${random(foodPlural)}`,
+    `{{name.lastName}}s ${random(cuisine)} ${random(foodSingular)}`,
     `{{name.lastName}}s`,
     `${random(foodSingular)} ${random(place)}`,
     `{{name.firstName}}s ${random(foodSingular)} ${random(place)}`,
     `The ${random(foodSingular)} ${random(place)}`,
+    `The ${random(adjective)} ${random(place)}`,
     `The ${random(adjective)} ${random(foodSingular)}`,
+    `The ${random(cuisine)} ${random(foodSingular)}`,
+    `{{name.firstName}}s ${random(adjective)} ${random(foodSingular)}`,
+    `{{name.firstName}}s ${random(cuisine)} ${random(foodSingular)}`,
   ];
 
   if (typeof format !== "number") {

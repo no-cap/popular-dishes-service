@@ -5,7 +5,7 @@ import { ReviewsLength } from './ReviewsBoxStyle';
 const ReviewsBox = ({ reviews }) => (
   <div>
     <ReviewsLength>{`Reviews (${reviews.length})`}</ReviewsLength>
-    {reviews.map((review) => <Review key={review._id} review={review} />)}
+    {reviews.map((review) => <Review key={review.reviewId} review={review} />)}
   </div>
 );
 
