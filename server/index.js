@@ -35,7 +35,11 @@ app.post('/api/reviews', (req, res) => {
 */
 
 app.get('/api/restaurants/:restaurantId', (req, res) => {
-  Controller.getDishes(req.params.restaurantId, res);
+  Controller.getRestaurant(req.params.restaurantId, res);
+});
+
+app.get('/api/users/:userId', (req, res) => {
+  Controller.getUser(req.params.userId, res);
 });
 
 app.get('/api/restaurants/:restaurantId/nearby', (req, res) => {
