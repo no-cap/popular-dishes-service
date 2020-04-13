@@ -98,7 +98,7 @@ class PopularDishList extends React.Component {
       <div>
         <Slider className="slider" onScroll={this.onChangeHandler}>
           {popularDishes.map((dish) => (
-            <Slide id={dish._id}>
+            <Slide id={dish.dishName}>
               <PopularDishEntry dish={dish} photos={dish.photos} buttonHandler={this.setView} />
             </Slide>
           ))}
