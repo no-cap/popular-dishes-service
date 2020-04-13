@@ -3,7 +3,7 @@ import $ from 'jquery';
 import PopularDishEntry from '../PopularDishEntry/PopularDishEntry';
 import Modal from '../Modal/Modal';
 import PopUpComponent from '../PopUpComponent/PopUpComponent';
-import { Slider, Slide, GoLeft, GoRight, NextDish, LastDish, DishArrowRight, DishArrowLeft } from './PopularDishList-style';
+import { Slider, Slide, GoLeft, GoRight, NextDish, LastDish, DishArrowRight, DishArrowLeft } from './PopularDishListStyles';
 import { CloseButton, ModalStyle, CloseFormat, DishButtons } from '../Modal/ModalStyles';
 
 const notFound = 'https://www.yorkshirecareequipment.com/wp-content/uploads/2018/09/no-image-available.jpg';
