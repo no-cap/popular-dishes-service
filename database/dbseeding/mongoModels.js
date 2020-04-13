@@ -16,6 +16,7 @@ const restaurantsSchema = new Schema({
     price: Number,
     description: String,
     reviews: [{
+      reviewId: Number,
       userId: {
         type: Schema.Types.ObjectId,
         ref: 'users',
