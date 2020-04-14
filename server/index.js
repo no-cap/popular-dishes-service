@@ -39,11 +39,11 @@ app.post('/api/restaurants/:restaurantId/:dishId/reviews', (req, res) => {
 */
 
 app.get('/api/restaurants/:restaurantId', (req, res) => {
-  Controller.getRestaurant(req.params.restaurantId, res);
+  Controller.getRestaurant(req, res);
 });
 
 app.get('/api/users/:userId', (req, res) => {
-  Controller.getUser(req.params.userId, res);
+  Controller.getUser(req, res);
 });
 
 // app.get('/api/restaurants/:restaurantId/nearby', (req, res) => {
