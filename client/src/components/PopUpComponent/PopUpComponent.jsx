@@ -32,6 +32,7 @@ class PopUpComponent extends React.Component {
 
   render() {
     const { photos, dishName, price, description, reviews } = this.props.dish;
+    const { host } = this.props;
     return (
       <ItemDescription>
         <PhotoBox photos={photos} ref={this.photoBoxElement} />
@@ -43,7 +44,7 @@ class PopUpComponent extends React.Component {
           <SmallDescriptionBorder>
             <p>{description}</p>
           </SmallDescriptionBorder>
-          <ReviewsBox reviews={reviews} />
+          <ReviewsBox reviews={reviews} host={host} />
         </ReviewsFormatter>
       </ItemDescription>
     );
