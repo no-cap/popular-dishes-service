@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import $ from 'jquery';
-import axios from 'axios';
 import StarBox from '../Starbox/Starbox';
 import Star from '../Starbox/Star';
 import PersonIcon from '../PersonIcon/PersonIcon';
