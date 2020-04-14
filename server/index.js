@@ -11,7 +11,7 @@ app.listen(process.env.SERVER_PORT, (err) => {
   if (err) {
     console.log(err);
   } else {
-    console.log(`Server is running on ${process.env.SERVER_PORT}`);
+    console.log(`Server is running on port: ${process.env.SERVER_PORT}`);
   }
 });
 
@@ -22,11 +22,15 @@ app.use('/', express.static(path.join(__dirname, '../client/dist/')));
   * POST ROUTES
 */
 
-app.post('/api/dishes', (req, res) => {
+app.post('/api/restaurants', (req, res) => {
+  Controller.postRestaurant(req, res);
+});
+
+app.post('/api/restaurants/:restaurantId/dishes', (req, res) => {
   Controller.postDish(req, res);
 });
 
-app.post('/api/reviews', (req, res) => {
+app.post('/api/restaurants/:restaurantId/:dishId/reviews', (req, res) => {
   Controller.postReview(req, res);
 });
 
@@ -42,9 +46,9 @@ app.get('/api/users/:userId', (req, res) => {
   Controller.getUser(req.params.userId, res);
 });
 
-app.get('/api/restaurants/:restaurantId/nearby', (req, res) => {
-  Controller.getNearby(req.params.restaurantId, res);
-});
+// app.get('/api/restaurants/:restaurantId/nearby', (req, res) => {
+//   Controller.getNearby(req.params.restaurantId, res);
+// });
 
 app.get('/popularDishes/arrow.png', (req, res) => {
   res.sendFile(path.join(__dirname, '/assets/arrow.png'));
