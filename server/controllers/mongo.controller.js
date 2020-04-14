@@ -6,10 +6,9 @@ const Model = require('../models/mongo.model.js');
   * POST ROUTES
 */
 
-// /api/restaurants/:restaurantID/dishes
-module.exports.postDish = (req, res) => {
-  const newDish = req.body;
-  Model.postDish(newDish, (err, result) => {
+module.exports.postRestaurant = (req, res) => {
+  const newRestaurant = req.body;
+  Model.postRestaurant(newRestaurant, (err, result) => {
     if (err) {
       console.log(err);
       res.status(400).send();
@@ -19,10 +18,24 @@ module.exports.postDish = (req, res) => {
   });
 };
 
-// /api/restaurants/:restaurantID/dishes/:dishID/reviews
+// /api/restaurants/:restaurantId/dishes
+module.exports.postDish = (req, res) => {
+  const newDish = req.body;
+  Model.postDish(newDish, req.params.restaurantId, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send();
+    } else {
+      res.status(200).send(result);
+    }
+  });
+};
+
+// /api/restaurants/:restaurantId/:dishID/reviews
 module.exports.postReview = (req, res) => {
   const newReview = req.body;
-  Model.postReview(newReview, (err, result) => {
+  const { restaurantId, dishId } = req.params;
+  Model.postReview(newReview, restaurantId, dishId, (err, result) => {
     if (err) {
       console.log(err);
       res.status(400).send();
@@ -36,9 +49,9 @@ module.exports.postReview = (req, res) => {
   * GET ROUTES
 */
 
-// /api/restaurants/:restaurantID
-module.exports.getRestaurant = (restaurantId, res) => {
-  Model.getRestaurant(restaurantId, (err, results) => {
+// /api/restaurants/:restaurantId
+module.exports.getRestaurant = (req, res) => {
+  Model.getRestaurant(req.params.restaurantId, (err, results) => {
     if (err) {
       console.log(err);
       res.status(400).send();
@@ -48,9 +61,9 @@ module.exports.getRestaurant = (restaurantId, res) => {
   });
 };
 
-// /api/users/:userID
-module.exports.getUser = (userId, res) => {
-  Model.getUser(userId, (err, result) => {
+// /api/users/:userId
+module.exports.getUser = (req, res) => {
+  Model.getUser(req.params.userId, (err, result) => {
     if (err) {
       console.log(err);
       res.status(400).send();
@@ -60,9 +73,9 @@ module.exports.getUser = (userId, res) => {
   });
 };
 
-// /api/restaurants/:restaurantID/nearby
+// /api/restaurants/:restaurantId/nearby
 module.exports.getNearby = (req, res) => {
-  const { restaurantId } = req.body;
+  const { restaurantId } = req.params;
   Model.getNearby(restaurantId, (err, results) => {
     if (err) {
       console.log(err);
@@ -77,10 +90,11 @@ module.exports.getNearby = (req, res) => {
   * PUT ROUTES
 */
 
-// /api/dishes/
+// /api/restaurants/:restaurantId/:dishId/dishes
 module.exports.putDish = (req, res) => {
   const updatedDish = req.body;
-  Model.putDish(updatedDish, (err, result) => {
+  const { restaurantId, dishId } = req.params;
+  Model.putDish(updatedDish, restaurantId, dishId, (err, result) => {
     if (err) {
       console.log(err);
       res.status(400).send();
@@ -90,10 +104,11 @@ module.exports.putDish = (req, res) => {
   });
 };
 
-// /api/reviews
+// /api/restaurants/:restaurantId/:dishId/:reviewId/reviews
 module.exports.putReview = (req, res) => {
   const updatedReview = req.body;
-  Model.putReview(updatedReview, (err, result) => {
+  const { restaurantId, dishId, reviewId } = req.params;
+  Model.putReview(updatedReview, restaurantId, dishId, reviewId, (err, result) => {
     if (err) {
       console.log(err);
       res.status(400).send();
@@ -107,10 +122,10 @@ module.exports.putReview = (req, res) => {
   * DELETE ROUTES
 */
 
-// /api/dishes
+// /api/restaurants/:restaurantId/:dishId
 module.exports.deleteDish = (req, res) => {
-  const deletedDish = req.body;
-  Model.deleteDish(deletedDish, (err, result) => {
+  const { restaurantId, dishId } = req.params;
+  Model.deleteDish(restaurantId, dishId, (err, result) => {
     if (err) {
       console.log(err);
       res.status(400).send();
@@ -120,10 +135,10 @@ module.exports.deleteDish = (req, res) => {
   });
 };
 
-// /api/reviews
+// /api/restaurants/:restaurantId/:dishId/:reviewId
 module.exports.deleteReview = (req, res) => {
-  const deletedReview = req.body;
-  Model.deleteReview(deletedReview, (err, result) => {
+  const { restaurantId, dishId, reviewId } = req.params;
+  Model.deleteReview(restaurantId, dishId, reviewId, (err, result) => {
     if (err) {
       console.log(err);
       res.status(400).send();
