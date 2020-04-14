@@ -11,8 +11,8 @@
   "scripts": {
     "test": "jest",
     "start": "node ./server/index.js",
-    "react-dev": "webpack -w --mode production",
-    "gen:dishes": "node --max-old-space-size=13312 ./database/dbseeding/genDishesBatch.js"
+    "react:build": "webpack --mode production",
+    "gen:dishes": "node --max-old-space-size=13312 ./database/dbseeding/genRestaurants.js"
   },
   "repository": {
     "type": "git",
