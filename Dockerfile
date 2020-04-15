@@ -1,7 +1,7 @@
 FROM node:latest
-RUN mkdir -p /usr/src/app
+RUN mkdir -p /src/app
 WORKDIR /usr/src/app
-COPY package*.json /usr/src/app/
+COPY . /src/app/
 RUN npm install
 RUN apt-get update && apt-get install -y vim
 COPY . /usr/src/app
