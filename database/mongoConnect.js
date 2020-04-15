@@ -16,6 +16,6 @@ module.exports = mongoose.createConnection(uri, options, (err) => {
   if (err) {
     console.log(`Failed to connect to ${MONGO_HOST}: \n${err}`);
   } else {
-    console.log(`Successfully connected to ${MONGO_HOST} as ${MONGO_USER}`);
+    console.log(`Successfully connected to mongodb://${MONGO_HOST}`);
   }
 });
