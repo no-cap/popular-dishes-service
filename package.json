@@ -39,7 +39,6 @@
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
     "newrelic": "^6.5.0",
-    "nodemon": "^2.0.2",
     "path": "^0.12.7",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
