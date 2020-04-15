@@ -3,7 +3,8 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 
 // Connection URL and database Name from .env
-const uri = `${process.env.MONGO_HOST}/${process.env.MONGO_DB}`;
+const { MONGO_USER, MONGO_PASSWORD, MONGO_HOST, MONGO_DB } = process.env;
+const uri = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DB}`;
 
 const options = {
   useNewUrlParser: true,
@@ -13,8 +14,8 @@ const options = {
 // Create and export MongoDB connection
 module.exports = mongoose.createConnection(uri, options, (err) => {
   if (err) {
-    console.log(`Failed to connect to ${uri}: \n${err}`);
+    console.log(`Failed to connect to ${MONGO_HOST}: \n${err}`);
   } else {
-    console.log(`Successfully connected to ${uri}`);
+    console.log(`Successfully connected to ${MONGO_HOST} as ${MONGO_USER}`);
   }
 });
