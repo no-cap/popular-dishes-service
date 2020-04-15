@@ -7,12 +7,7 @@ const { ObjectID, MongoClient } = require('mongodb');
 require('dotenv').config();
 
 const randomNum = (min, max) => Math.floor((Math.random() * (max - min) + min));
-const NumberOfRestaurants = parseInt(process.argv[2], 10) || 15000;
-let reviewIdCount = 1;
-const getAndUpdateReviewCount = () => {
-  reviewIdCount += 1;
-  return reviewIdCount - 1;
-};
+const NumberOfRestaurants = 1;
 
 const adjective = ['Organic', 'Edible', 'Tart', 'Hot', 'Spicy', 'SweetNSour', 'Savoury', 'Bittersweet', 'Seasoned', 'Fresh', 'Ketchupy', 'Garlicy', 'Roasted', 'Grilled', 'Fried', 'DeepFried', 'Grilled', 'Family', 'Sweet', 'Savory', 'Super', 'Giant', 'Summer', 'Winter', 'Wasabi', 'Whipped', 'Spring', 'BigOl', 'Tasty', 'BiteSize', 'Blended', 'Aged', 'Boiled', 'Candied', 'Carmelized', 'CharBroiled', 'Chocolate', 'Delectable', 'Delightful', 'Famous', 'Flaky', 'Fluffy', 'Frozen', 'Ginger', 'Golden', 'Toasted', 'Hearty', 'Hot', 'Intense', 'Jumbo', 'Mini', 'Lavish', 'Lite', 'Lukewarm', 'MouthWatering', 'Natural', 'Peppery', 'Peppered', 'Blackened', 'Pickled', 'Poached', 'Scrumptious', 'Silky', 'Smoked', 'Smoky', 'Smooth', 'Sprinkled', 'Steamy', 'Steamed', 'Succulent', 'Sugary', 'Strawberry', 'Sweetened', 'Thin', 'Thick', 'Fat', 'Traditional', 'Velvety', 'Zesty', 'Zingy', 'Crisp', 'Crispy', 'Crumbly', 'Crunchy', 'Sour', 'Juicy', 'Vegan', 'Big', 'Delicious'];
 const cuisine = ['Italian', 'Southern', 'Cajun', 'Lebanese', 'Jamaican', 'Tunisian', 'Danish', 'Belgian', 'Indonesian', 'Swedish', 'Norwegian', 'Soul', 'British', 'Haute', 'Armenian', 'Vegetarian', 'Chilean', 'Hawaiian', 'Mediterranean', 'Greek', 'American', 'Fusion', 'Peruvian', 'Argentinian', 'Thai', 'Indian', 'Japanese', 'Canadian', 'German', 'French', 'Spanish', 'Ethiopian', 'Arabian', 'Polish', 'Lithuanian', 'Georgian', 'Cuban', 'Sicilian', 'Moroccan', 'Vietnamese', 'Bulgarian', 'Chinese', 'Mexican', 'Russian', 'Slavic', 'European', 'French', 'Japanese', 'Korean', 'German', 'Turkish', 'Samoan', 'Filipino', 'Cambodian', 'Burmese', 'Pakistani', 'Afghan', 'Persian', 'Iranian', 'British'];
@@ -25,7 +20,7 @@ const allRestaurants = [];
 const allUsers = [];
 
 const someUser = (review) => {
-  console.log(review.userId);
+  // console.log(review.userId);
   const newUser = {
     _id: review.userId,
     username: faker.name.firstName(),
@@ -41,7 +36,7 @@ const someReviews = (num) => {
   const reviews = [];
   for (let i = 0; i < num; i += 1) {
     const newReview = {
-      reviewId: getAndUpdateReviewCount(),
+      reviewId: new ObjectID(),
       userId: new ObjectID(),
       photoUrl: `https://sdc-food.s3-us-west-1.amazonaws.com/${randomNum(0, 738)}.jpg`,
       caption: faker.lorem.words(),
@@ -56,30 +51,104 @@ const someReviews = (num) => {
   return reviews;
 };
 
+const superCaliforniaReviews = (num) => {
+
+};
+
+const vegetableGardenReviews = (num) => {
+
+};
+
+const patatatacosReviews = (num) => {
+
+};
+
+const beyondTacosReviews = (num) => {
+
+};
+
+const avocadoSmoothieReviews = (num) => {
+
+};
+
+const volcanoReviews = (num) => {
+
+};
+
+const moleTacosReviews = (num) => {
+
+};
+
 const someDishes = (num) => {
   const dishes = [];
-  for (let i = 0; i < num; i += 1) {
-    const noOfReviews = randomNum(0, 8);
-    const newDish = {
-      dishName: `${prefixSet[randomNum(0, prefixSet.length)]} ${foodSingular[randomNum(0, foodSingular.length)]}`,
-      price: `${randomNum(6, 25)}.${randomNum(80, 100)}`,
-      description: `${faker.lorem.words()} ${faker.lorem.words()}`,
-      reviews: someReviews(noOfReviews),
-    };
-    dishes.push(newDish);
-  }
+
+  const newDish1 = {
+    dishName: 'Super California',
+    price: '10.75',
+    description: 'A California classic burrito stuffed with seitan, beans, fresh, pico de gallo, french fries, and guacamole.',
+    reviews: superCaliforniaReviews(10),
+  };
+  dishes.push(newDish1);
+
+  const newDish2 = {
+    dishName: 'Vegetable Garden',
+    price: '9.75',
+    description: 'A crisp burrito filled with our signature rice, black beans, crisp cabbage, pico de gallo, and grilled veggies.',
+    reviews: vegetableGardenReviews(5),
+  };
+  dishes.push(newDish2);
+
+  const newDish3 = {
+    dishName: 'Patatatacos',
+    price: '5.50',
+    description: 'Two corn flour tacos with crispy fried potatoes, grilled veggies, and fresh salsa.',
+    reviews: patatatacosReviews(4),
+  };
+  dishes.push(newDish3);
+
+  const newDish4 = {
+    dishName: 'Beyond Tacos',
+    price: '6.50',
+    description: 'Two corn flour tacos with spiced beyond beef, salsa, and fresh cilantro.',
+    reviews: beyondTacosReviews(8),
+  };
+  dishes.push(newDish4);
+
+  const newDish5 = {
+    dishName: 'Avocado Smoothie',
+    price: '4.50',
+    description: 'This refreshing and lightly sweetened shake is the perfect complement to a spicy taco!',
+    reviews: avocadoSmoothieReviews(3),
+  };
+  dishes.push(newDish5);
+
+  const newDish6 = {
+    dishName: 'Volcano',
+    price: '10.75',
+    description: 'A smoldering, wet burrito filled with spicy seitan, black beans, rice, and veggies.',
+    reviews: volcanoReviews(4),
+  };
+  dishes.push(newDish6);
+
+  const newDish7 = {
+    dishName: 'Mole Tacos',
+    price: '5.00',
+    description: 'Two seasoned beyond beef tacos drizzled with spicy mole sauce and topped with fresh cilantro.',
+    reviews: moleTacosReviews(2),
+  };
+  dishes.push(newDish7);
+
   return dishes;
 };
 
 const someRestaurants = () => {
   for (let i = 0; i < NumberOfRestaurants; i += 1) {
-    const noOfDishes = randomNum(0, 8);
     const newId = new ObjectID();
-    // console.log(newId);
+    console.log(newId);
     const newRestaurant = {
       _id: newId,
-      restaurantName: faker.company.companyName(),
-      dishes: someDishes(noOfDishes),
+      restaurantName: 'Blazing Tacos',
+      dishes: someDishes(8),
     };
     allRestaurants.push(newRestaurant);
   }

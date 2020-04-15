@@ -1,55 +1,46 @@
 {
-  "name": "popular-dishes",
+  "name": "popular-dishes-service",
   "jest": {
     "setupFiles": [
       "./srcForTests/setupTests.js"
     ]
   },
   "version": "1.0.0",
-  "description": "repo for the popular dishes component",
+  "description": "PopularDishes Component",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "start": "node ./server/index.js",
-    "react-dev": "webpack -w --mode production",
-    "gen:dishes": "node --max-old-space-size=13312 ./database/dbseeding/genDishes.js",
-    "gen:dishes:batch": "node --max-old-space-size=13312 ./database/dbseeding/genDishesBatch.copy.js",
-    "gen:csv": "node --max-old-space-size=13312 ./database/dbseeding/writeAllToCSV.js"
+    "react:build": "webpack --mode production",
+    "gen:dishes": "node --max-old-space-size=13312 ./database/dbseeding/genRestaurants.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wonder4-com/popular-dishes.git"
+    "url": "git+https://github.com/no-cap/popular-dishes-service.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wonder4-com/popular-dishes/issues"
+    "url": "https://github.com/no-cap/popular-dishes-service/issues"
   },
-  "homepage": "https://github.com/wonder4-com/popular-dishes#readme",
+  "homepage": "https://github.com/no-cap/popular-dishes-service/#readme",
   "dependencies": {
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
-    "aws-sdk": "^2.643.0",
-    "axios": "^0.19.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
-    "cli-progress": "^3.6.1",
-    "dateformat": "^3.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "jquery": "^3.4.1",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
-    "mysql": "^2.18.1",
     "newrelic": "^6.5.0",
     "nodemon": "^2.0.2",
     "path": "^0.12.7",
-    "pg": "^8.0.0",
-    "puppeteer": "^2.1.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "styled-components": "^5.0.1",

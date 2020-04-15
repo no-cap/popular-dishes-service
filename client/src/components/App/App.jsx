@@ -12,10 +12,11 @@ class App extends React.Component {
     this.state = {
       items: [],
       // eslint-disable-next-line no-undef
-      restaurantId: '5e92696964027734e0a2063a',
+      restaurantId: '5e9634a6b03ae328ccc60f09',
       restaurant: null,
       visibleMenu: false,
       popularDishes: [],
+      host: 'localhost:3000',
     };
     this.getDishes = this.getDishes.bind(this);
     this.showMenu = this.showMenu.bind(this);
@@ -28,7 +29,9 @@ class App extends React.Component {
   }
 
   getDishes(restaurantId) {
-    $.get(`http://localhost:3000/api/restaurants/${restaurantId}`, (data) => {
+    const { host } = this.state;
+    console.log('making get request to ', `http://${host}/api/restaurants/${restaurantId}`);
+    $.get(`http://${host}/api/restaurants/${restaurantId}`, (data) => {
       const { _id, restaurantName, dishes } = data;
       const tempDishes = dishes.map((dish) => {
         dish.photos = dish.reviews.map((review) => review.photoUrl);
@@ -55,7 +58,7 @@ class App extends React.Component {
 
   render() {
     // <Star />
-    const { restaurantName, popularDishes, visibleMenu } = this.state;
+    const { restaurantName, popularDishes, visibleMenu, host } = this.state;
     const modal = (
       <Modal>
         <ModalStyle className="modal" onClick={this.outsideModalHandler}>
@@ -71,7 +74,7 @@ class App extends React.Component {
       <AppBody>
         <Title>Popular Dishes</Title>
         <AllItems onClick={this.showMenu}>View Full Menu</AllItems>
-        <PopularDishList popularDishes={popularDishes} />
+        <PopularDishList popularDishes={popularDishes} host={host} />
         {visibleMenu ? modal : null}
       </AppBody>
     );

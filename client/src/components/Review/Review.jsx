@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import $ from 'jquery';
-import axios from 'axios';
 import StarBox from '../Starbox/Starbox';
 import Star from '../Starbox/Star';
 import PersonIcon from '../PersonIcon/PersonIcon';
@@ -20,14 +19,14 @@ import {
   ReviewText,
 } from './ReviewStyles';
 
-const Review = ({ review }) => {
+const Review = ({ review, host }) => {
   const [readMore, setReadMore] = useState(false);
   const [username, setUsername] = useState('');
   const [userPhoto, setUserPhoto] = useState('');
   const { photoUrl, rating, date, reviewText } = review;
 
   useEffect(() => {
-    $.get(`http://localhost:3000/api/users/${review.userId}`, (result) => {
+    $.get(`http://${host}/api/users/${review.userId}`, (result) => {
       setUsername(result.username);
       setUserPhoto(result.userPhoto);
     });

@@ -92,7 +92,7 @@ class PopularDishList extends React.Component {
 
   render() {
     const { scrollPosition, modalVisibility, index, dish: dish, photos } = this.state;
-    const { popularDishes } = this.props;
+    const { popularDishes, host } = this.props;
 
     return (
       <div>
@@ -113,7 +113,7 @@ class PopularDishList extends React.Component {
                   <CloseFormat id="closeModal">Close</CloseFormat>
                   <div className="closeIt">&#x2715;</div>
                 </CloseButton>
-                <PopUpComponent dish={dish} ref={this.popUpComponentElement} handleKeyPress={this.handleKeyPress} />
+                <PopUpComponent dish={dish} ref={this.popUpComponentElement} handleKeyPress={this.handleKeyPress} host={host} />
                 <DishButtons>
                   {(index < popularDishes.length - 1) ? (
                     <NextDish id="nextDish" onClick={this.setView}>
