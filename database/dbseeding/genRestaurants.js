@@ -70,7 +70,7 @@ const someRestaurants = () => {
   for (let i = 0; i < NumberOfRestaurants; i += 1) {
     const noOfDishes = randomNum(0, 8);
     const newId = new ObjectID();
-    console.log(newId);
+    // console.log(newId);
     const newRestaurant = {
       _id: newId,
       restaurantName: faker.company.companyName(),
@@ -81,10 +81,12 @@ const someRestaurants = () => {
 };
 
 someRestaurants();
+const { MONGO_USER, MONGO_PASSWORD, MONGO_HOST, MONGO_DB } = process.env;
+const uri = `mongodb://${MONGO_HOST}/${MONGO_DB}`;
 
-MongoClient.connect(process.env.MONGO_HOST, { useUnifiedTopology: true }, (err, client) => {
+MongoClient.connect(uri, { useUnifiedTopology: true }, (err, client) => {
   if (err) console.error(`Failed to connect to database:\n${err}`);
-  else console.log(`Successfully connected to ${process.env.MONGO_HOST}`);
+  else console.log(`Successfully connected to mongod://${process.env.MONGO_HOST}`);
   const db = client.db(process.env.MONGO_DB);
 
   // Initialize unordered Batches
