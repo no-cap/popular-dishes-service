@@ -37,7 +37,6 @@
     "jquery": "^3.4.1",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
-    "newrelic": "^6.5.0",
     "path": "^0.12.7",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
