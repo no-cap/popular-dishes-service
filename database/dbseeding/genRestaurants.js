@@ -81,8 +81,8 @@ const someRestaurants = () => {
 };
 
 someRestaurants();
-const { MONGO_USER, MONGO_PASSWORD, MONGO_HOST, MONGO_DB } = process.env;
-const uri = `mongodb://${MONGO_HOST}/${MONGO_DB}`;
+const { MONGO_USER, MONGO_PASSWORD, MONGO_HOST1, MONGO_HOST2, MONGO_HOST3, MONGO_DB } = process.env;
+const uri = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST1}/${MONGO_DB}`;
 
 MongoClient.connect(uri, { useUnifiedTopology: true }, (err, client) => {
   if (err) console.error(`Failed to connect to database:\n${err}`);
